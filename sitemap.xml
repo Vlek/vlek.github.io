@@ -1,1 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"><url><loc>https://vlek.github.io/categories/</loc></url><url><loc>https://vlek.github.io/tags/</loc></url><url><loc>https://vlek.github.io/</loc></url></urlset>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://vlek.github.io/exercise/</loc>
+    <lastmod>2022-05-25T20:46:12-07:00</lastmod>
+  </url><url>
+    <loc>https://vlek.github.io/posts/</loc>
+    <lastmod>2022-05-25T20:46:12-07:00</lastmod>
+  </url><url>
+    <loc>https://vlek.github.io/</loc>
+    <lastmod>2022-05-25T20:46:12-07:00</lastmod>
+  </url><url>
+    <loc>https://vlek.github.io/diet/</loc>
+    <lastmod>2022-05-25T18:07:19-07:00</lastmod>
+  </url><url>
+    <loc>https://vlek.github.io/categories/</loc>
+  </url><url>
+    <loc>https://vlek.github.io/tags/</loc>
+  </url>
+</urlset>
