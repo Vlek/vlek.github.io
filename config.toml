@@ -1,0 +1,4 @@
+baseURL = 'https://vlek.github.io'
+languageCode = 'en-us'
+title = "Vlek's Personal Blog"
+theme = "etch"
