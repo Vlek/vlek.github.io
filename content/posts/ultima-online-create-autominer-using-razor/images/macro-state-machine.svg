@@ -1,0 +1,35 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="728" height="566" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <ellipse stroke="white" stroke-width="1" fill="none" cx="232.5" cy="436.5" rx="52" ry="52" />
+  <text fill="white" x="184.5" y="442.5" font-family="Times New Roman" font-size="20">Bank Ore</text>
+  <ellipse stroke="white" stroke-width="1" fill="none" cx="212.5" cy="208.5" rx="52" ry="52" />
+  <text fill="white" x="146.5" y="214.5" font-family="Times New Roman" font-size="20">Restock Inv</text>
+  <ellipse stroke="white" stroke-width="1" fill="none" cx="473.5" cy="159.5" rx="52" ry="52" />
+  <text fill="white" x="419.5" y="165.5" font-family="Times New Roman" font-size="20">Tele Next</text>
+  <ellipse stroke="white" stroke-width="1" fill="none" cx="674.5" cy="312.5" rx="52" ry="52" />
+  <text fill="white" x="626.5" y="318.5" font-family="Times New Roman" font-size="20">Mine Ore</text>
+  <ellipse stroke="white" stroke-width="1" fill="none" cx="484.5" cy="512.5" rx="52" ry="52" />
+  <text fill="white" x="430.5" y="518.5" font-family="Times New Roman" font-size="20">Tele Bank</text>
+  <ellipse stroke="white" stroke-width="1" fill="none" cx="87.5" cy="54.5" rx="52" ry="52" />
+  <text fill="white" x="0" y="60.5" font-family="Times New Roman" font-size="20">Except No Resources</text>
+  <polygon stroke="white" stroke-width="1" points="179.729,168.126 120.271,94.874" />
+  <polygon fill="white" stroke-width="1" points="120.271,94.874 121.431,104.236 129.195,97.934" />
+  <text fill="white" x="155.5" y="123.5" font-family="Times New Roman" font-size="20">Exception</text>
+  <polygon stroke="white" stroke-width="1" points="227.956,384.699 217.044,260.301" />
+  <polygon fill="white" stroke-width="1" points="217.044,260.301 212.762,268.707 222.724,267.834" />
+  <text fill="white" x="228.5" y="327.5" font-family="Times New Roman" font-size="20">Ore Banked</text>
+  <polygon stroke="white" stroke-width="1" points="263.607,198.905 422.393,169.095" />
+  <polygon fill="white" stroke-width="1" points="422.393,169.095 413.608,165.657 415.453,175.485" />
+  <text fill="white" x="319.5" y="210.5" font-family="Times New Roman" font-size="20">Restocked</text>
+  <polygon stroke="white" stroke-width="1" points="514.877,190.996 633.123,281.004" />
+  <polygon fill="white" stroke-width="1" points="633.123,281.004 629.786,272.18 623.729,280.137" />
+  <text fill="white" x="448.5" y="256.5" font-family="Times New Roman" font-size="20">Teleported</text>
+  <polygon stroke="white" stroke-width="1" points="638.685,350.2 520.315,474.8" />
+  <polygon fill="white" stroke-width="1" points="520.315,474.8 529.45,472.444 522.2,465.556" />
+  <text fill="white" x="514.5" y="403.5" font-family="Times New Roman" font-size="20">Mined</text>
+  <polygon stroke="white" stroke-width="1" points="434.715,497.485 282.285,451.515" />
+  <polygon fill="white" stroke-width="1" points="282.285,451.515 288.501,458.612 291.388,449.037" />
+  <text fill="white" x="353.5" y="462.5" font-family="Times New Roman" font-size="20">Teleported</text>
+</svg>

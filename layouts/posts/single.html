@@ -1,0 +1,20 @@
+{{ define "main" }}
+<section id="main">
+  <h1 id="title">{{ .Title }}</h1>
+  <aside id="meta">
+    <h4 id="date"> {{ .Date.Format "Mon Jan 2, 2006" }} </h4>
+    <h5 id="wordcount"> {{ .WordCount }} Words </h5>
+  </aside>
+  <div>
+    <article id="content">
+      {{ if (.Params.toc) }}
+        <h1>Table of Contents</h1>
+
+        {{ .TableOfContents }}
+      {{ end }}
+
+      {{ .Content }}
+    </article>
+  </div>
+</section>
+{{ end }}

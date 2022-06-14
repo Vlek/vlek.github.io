@@ -9,3 +9,14 @@ copyright = "Copyright © 2022 Vlek"
 
 [permalinks]
 posts = "/:title/"
+
+[markup]
+[markup.highlight]
+style = 'dracula'
+[markup.tableOfContents]
+endLevel = 2
+ordered = false
+startLevel = 1
+[markup.goldmark.renderer]
+unsafe = true
+footnote = true
