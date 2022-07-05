@@ -570,7 +570,9 @@ caused it to trip up.&lt;/p&gt;
 &lt;h3 id=&#34;teleporting&#34;&gt;Teleporting&lt;/h3&gt;
 &lt;p&gt;One of the slowest parts of the bot is the selection for which spot to teleport
 next. What I did works, but the nested if statements are all parsed in order so
-there is a significant lag as it goes through all of the &lt;code&gt;Ifs&lt;/code&gt; and then the &lt;code&gt;End Ifs&lt;/code&gt;. The way that I could think of doing this that will&lt;/p&gt;
+there is a significant lag as it goes through all of the &lt;code&gt;Ifs&lt;/code&gt; and then the &lt;code&gt;End Ifs&lt;/code&gt;. The way that I could think of doing this that will scale is to do a binary
+search using submacros. This will get around most of the nested &lt;code&gt;If&lt;/code&gt;&amp;rsquo;s where
+possible.&lt;/p&gt;
 &lt;h3 id=&#34;locations&#34;&gt;Locations&lt;/h3&gt;
 &lt;p&gt;I was using the books and spots that I had. However, these were not necessarily
 the best spots. I do not know if the two books I had were not repeats.&lt;/p&gt;

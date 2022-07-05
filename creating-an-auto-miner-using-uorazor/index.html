@@ -24,7 +24,7 @@
   <h1 id="title">Creating an Auto-miner Using UORazor</h1>
   <aside id="meta">
     <h4 id="date"> Sun Jun 12, 2022 </h4>
-    <h5 id="wordcount"> 3571 Words </h5>
+    <h5 id="wordcount"> 3591 Words </h5>
   </aside>
   <div>
     <article id="content">
@@ -625,7 +625,9 @@ caused it to trip up.</p>
 <h3 id="teleporting">Teleporting</h3>
 <p>One of the slowest parts of the bot is the selection for which spot to teleport
 next. What I did works, but the nested if statements are all parsed in order so
-there is a significant lag as it goes through all of the <code>Ifs</code> and then the <code>End Ifs</code>. The way that I could think of doing this that will</p>
+there is a significant lag as it goes through all of the <code>Ifs</code> and then the <code>End Ifs</code>. The way that I could think of doing this that will scale is to do a binary
+search using submacros. This will get around most of the nested <code>If</code>&rsquo;s where
+possible.</p>
 <h3 id="locations">Locations</h3>
 <p>I was using the books and spots that I had. However, these were not necessarily
 the best spots. I do not know if the two books I had were not repeats.</p>
