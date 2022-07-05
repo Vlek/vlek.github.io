@@ -637,7 +637,9 @@ caused it to trip up.
 One of the slowest parts of the bot is the selection for which spot to teleport
 next. What I did works, but the nested if statements are all parsed in order so
 there is a significant lag as it goes through all of the `Ifs` and then the `End
-Ifs`. The way that I could think of doing this that will 
+Ifs`. The way that I could think of doing this that will scale is to do a binary
+search using submacros. This will get around most of the nested `If`'s where
+possible.
 
 ### Locations
 
