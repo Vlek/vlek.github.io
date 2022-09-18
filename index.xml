@@ -591,6 +591,75 @@ introduction, merely to show it is possible.&lt;/p&gt;
     
     
     <item>
+      <title>Properly Auto-mount Drives Ubuntu</title>
+      <link>https://vlek.github.io/properly-auto-mount-drives-ubuntu/</link>
+      <pubDate>Thu, 09 Jun 2022 22:10:32 -0700</pubDate>
+      
+      <guid>https://vlek.github.io/properly-auto-mount-drives-ubuntu/</guid>
+      <description>&lt;h2 id=&#34;background&#34;&gt;Background&lt;/h2&gt;
+&lt;p&gt;SSDs are fast. However, large ones are still quite expensive and those insane
+read/write speeds are not necessary for all types of content anyway. For videos,
+music, and images, it could be much easier on the wallet to store those on a
+separate hard-drive, especially as HDD drives are relatively inexpensive and
+large.&lt;/p&gt;
+&lt;p&gt;I personally use Linux, I prefer it over Windows for so many reasons. I tend to
+use Ubuntu or Ubuntu-derivates, so this is geared towards that system
+specifically. I am unsure, but I believe that these steps may be applicable to
+other distros, but that is the one that I have tried this on multiple times.&lt;/p&gt;
+&lt;h2 id=&#34;steps&#34;&gt;Steps&lt;/h2&gt;
+&lt;p&gt;Please note that I am going to assume the folder that you wish to have the
+contents of the mounted drive at will be called &amp;lsquo;data&amp;rsquo;. Please replace in the
+below instructions if you wish for the folder to have a different name.&lt;/p&gt;
+&lt;h3 id=&#34;1-connect-the-external-drive-to-the-ubuntu-pc&#34;&gt;1. Connect the external drive to the Ubuntu PC.&lt;/h3&gt;
+&lt;h3 id=&#34;2-gather-drive-info&#34;&gt;2. Gather drive info&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Get the name of the drive using &lt;code&gt;sudo fdisk -l&lt;/code&gt;
+&lt;ol&gt;
+&lt;li&gt;It is likely that the drive name will start with &lt;code&gt;/dev/sd&lt;/code&gt;, confirm your
+selection by double-checking the drive size.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Get the UUID using &lt;code&gt;sudo blkid&lt;/code&gt;
+&lt;ol&gt;
+&lt;li&gt;Using the drive name we got in the previous step, we can find the specific
+entry&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-make-the-mount-point&#34;&gt;3. Make the mount point&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sudo mkdir /data&lt;/code&gt;
+1. Note that there are two ways to do this: either you create the folder
+under &lt;code&gt;/media/&amp;lt;username&amp;gt;/&lt;/code&gt;, or you put it elsewhere. Placing it in the
+media folder will automatically allow that user to have read and write
+access to the mount point. If that is not what is desired or you would
+like other users to also be able to access those files, consider placing
+them elsewhere.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;4-give-users-access-to-the-mount-point&#34;&gt;4. Give users access to the mount point&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sudo groupadd data&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo usermod -aG data &amp;lt;username&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;sudo chown -R :data /data&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;5-create-new-entry-in-fstab&#34;&gt;5. Create new entry in &lt;code&gt;fstab&lt;/code&gt;:&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;sudo vim /etc/fstab&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Add a new line in the format: &lt;code&gt;UUID=&amp;lt;ID from blkid&amp;gt; /data    auto nosuid,nodev,nofail,x-gvfs-show 0 0&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Test entry using &lt;code&gt;sudo mount -a&lt;/code&gt;. If no errors, then the entry was added
+correctly and you are safe to reboot.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;6-reboot&#34;&gt;6. Reboot&lt;/h3&gt;
+&lt;p&gt;&lt;br&gt;&lt;br&gt;
+After your computer is done rebooting, you should be able to navigate to the
+location of the drive and see that it had automounted and that its contents are
+available to the users that were given access.&lt;/p&gt;
+</description>
+    </item>
+    
+    
+    
+    <item>
       <title>Exercise</title>
       <link>https://vlek.github.io/exercise/</link>
       <pubDate>Wed, 25 May 2022 20:46:12 -0700</pubDate>
