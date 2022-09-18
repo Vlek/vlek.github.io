@@ -1,6 +1,6 @@
 ---
-title: "Properly Auto-mount Drives Ubuntu"
-date: 2022-06-09T22:10:32-07:00
+title: "Properly Auto-mount Drives in Ubuntu"
+date: 2022-09-18T22:10:32-07:00
 draft: false
 toc: false
 ---
