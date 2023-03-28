@@ -9,9 +9,8 @@ toc: true
 
 # Introduction
 
-Asteroids the space shooter game originally developed by the company Atari in the
-year 1979 was first introduced as a cabinet arcade game. Its iconic visual style
-and gameplay has seen many revisions and spawned an entire genre of video games
+Asteroids, the space shooter game originally developed by Atari in 1979, has an iconic visual style
+and gameplay that has seen many revisions and spawned an entire genre of video games
 under the top-down shooter moniker. Due to its simple design and appeal, it is
 appealing to programmers to recreate the classic game in an attempt
 to get a better understanding of game making principles, including vector
@@ -21,7 +20,7 @@ having multiple objects moving around and interacting with each other through
 collision detection.
 
 In this article, I will be going over my implementation of the classic Asteroids
-game and detailing the things that I learned along the way, including tid bits
+game and detailing the things that I learned along the way, including tidbits
 regarding the Pico-8 game engine that I used to do it.
 
 # Environment Setup
@@ -30,7 +29,7 @@ First thing is first, I needed to get my tooling set up in a way that would make
 the game development easier than working within Pico-8. While the game engine
 does provide an editor, it lacks a lot of features that would make programming
 easier, including syntax highlighting, warnings and error notifications, and
-smart indent/dedent along with a host of macros.
+smart indent/outdent along with a host of macros.
 
 ## Moving to Atom
 
@@ -43,7 +42,7 @@ and global variables that the engine provided.
 
 I had even done a write-up where others weighed in on the configuration that I
 had done, adding to the conversation with me updating my post to include other
-insights that the community had included.
+insights that the community had included which helped me further hone my IDE.
 
 ## Auto-update and play
 
@@ -582,7 +581,7 @@ function print_score()
   end
   print(player.score1,x_offset,0)
 end
-{{< / highlight >}}}}
+{{< / highlight >}}
 </details>
 
 # Analytics
