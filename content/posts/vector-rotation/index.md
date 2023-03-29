@@ -120,4 +120,7 @@ allows for their rotation which, in some cases (especially vector graphics
 games), can be the desired effect.
 
 Note that the rotation may need to be accounted for in one's code dealing with
-collision detection.
+collision detection. This may also work in a 3D space if the rotation that is
+being applied only happens in a single plane that is at a right-angle. Any
+deviation from that would require that the third dimension be accounted for in
+the calculation.
