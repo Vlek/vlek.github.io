@@ -11,11 +11,40 @@ keywords: "programming, vector, graphics, games"
 ![Rotating spaceship](/vector-rotation/assets/rotation.gif)
 # Introduction
 
+Rotating a point or a shape around a fixed point is useful in a number of
+scenarios, especially when it comes to game making. A number of effects, such as
+having a facing direction, floating shapes, rotation, and other graphical
+changes can all be handled using this base formula.
+
 While creating an Asteroids clone, I needed to be able to handle rotation of the
 player's space ship which I had drawn using vector graphics. Three X/Y
 coordinates were being saved and lines drawn between them in order to draw the
 ship which needed to be rotated based on which direction the player was facing
-at any given time.
+at any given time. For this, I used 2D rotation around an origin point formula.
+
+# Algorithm
+
+For the Pico-8 engine, the algorithm is going to be different than the one that
+is generally given in a math-based answer. This is due to two factors:
+- The Y-axis is inverted. Usually negative numbers are lower than positive.
+  - When dealing with screens, one must remember that (0,0) is the top-left most
+    point.
+- The cos and sin functions operate differently than in other languages.
+  - From the [documentation](https://pico-8.fandom.com/wiki/Cos): <i>PICO-8 uses an input range of 0.0 to 1.0 to
+    represent the angle, a percentage of the unit circle. Some refer to these
+    units as "turns". For instance, 180° or π (3.14159) radians corresponds to
+    0.5 turns in PICO-8's representation of angles. In fact, for fans of τ
+    (tau), it's just a matter of dropping τ from your expression.</i>
+  - Also it looks like the rotation is reversed. Positive is clockwise, not
+    counter-clockwise.
+
+
+new x = x + R * cos(A / 360)<br>
+new y = y + R * sin(A / 360)
+
+Where:
+- R = The radius of the circle that is made between the origin and the point
+- A = The degrees off of the base facing angle (0-360 inclusive)
 
 # Example case: Asteroids Spaceship
 
@@ -45,16 +74,6 @@ player.y = 64
 -- New variable for keeping track of where the player is facing
 player.direction = 275
 {{< / highlight >}}
-
-# Algorithm
-
-new x = x + L * cos(A / 360)<br>
-new y = y + L * sin(A / 360)
-
-Where:
-- L = Length from center point
-- A = Angle
-
 
 # Example Case Code
 {{< highlight lua >}}
