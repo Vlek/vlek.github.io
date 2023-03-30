@@ -46,6 +46,33 @@ values for the X and Y.
 
 # Example case: Asteroids
 
+## Adding velocity:
+
+In order to have movement, my spaceship needed to allow for the user to use the
+up arrow to go forward. This would then look at the angle that the spaceship was
+facing and apply the velocity.
+
+The reason that I am using the mid function here is that it always returns back
+the middle value. I am using this as a way to ensure that the value that I got
+back was always within the max value range given. This is up to the negative
+range of the max in order to have velocities going the opposite direction.
+
+{{< highlight lua >}}
+-- update velocity and v-angle
+player.vx = mid(
+  -player.max_thrust,
+  player.vx + cos(player.facing_angle/360) * -player.thrust,
+  player.max_thrust
+)
+
+player.vy = mid(
+  -player.max_thrust,
+  player.vy + sin(player.facing_angle/360) * -player.thrust,
+  player.max_thrust
+)
+{{</ highlight >}}
+
+## Applying movement:
 For the case where I needed this, I had remade Asteroids and needed to hold the
 velocity for my spaceship, asteroids, the explosion particles, and the shots
 that were fired. I had abstracted the items in such a way that I was able to use
