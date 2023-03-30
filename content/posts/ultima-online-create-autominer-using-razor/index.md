@@ -652,7 +652,7 @@ While I did this specifically for mining ore, the technique could readily be
 applied to other types of resources. I am thinking specifically lumberjacking as
 a potential candidate.
 
-## Suggestable?
+## Suggestible?
 
 In no way would I suggest someone do this. Not only is it potentially not
 allowed by the server that one is playing on, it also is just silly. There are

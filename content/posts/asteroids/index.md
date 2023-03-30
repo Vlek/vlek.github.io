@@ -88,9 +88,26 @@ excited about the possibility of doing this sort of math for vector-based
 graphics. In one instance, I had the spaceship rotating and warping in and out
 of view as though it was traveling across the face of an invisible ball.
 
+For my article related to rotation, [click here]({{< relref
+"posts/vector-rotation" >}})
+
 ## Adding asteroids
 
+Asteroids are added based on the level number. Additional asteroids are given
+for higher levels with a maximum of four big ones being given at high enough
+levels. This is due to the small screen real estate and something that could and
+very likely should be dialed in further, even with smaller asteroids thrown into
+the mix.
+
 ## Handling collisions
+
+While it will cause collisions when not strictly correct, I am using
+circle/circle collision detection. What this means is that, the spaceship is
+touching an asteroid if it's the case that the midpoints of the two objects are
+close enough that their radius' are overlapping.
+
+This works a lot better for things that are more circular, such as the shots
+that the ship fires.
 
 ## Handling movement
 
@@ -110,11 +127,54 @@ movement were both generalizable to all of the objects in the game. Each thing,
 including the graphical bits of the asteroids and spaceship that are generated
 on a collision, are all moved using the same code!
 
+For my article related to velocity, [click here]({{< relref "posts/velocity" >}}).
+
 ## Setbacks
 
-## Workarounds
+### Rotation
 
-## Recording
+As noted in my [article]({{< relref "posts/vector-rotation" >}}) on rotation,
+there were some quirks in the Pico-8 engine which caused the actual algorithm
+that I am using to be different than the standard one that would generally be
+used. The one that I am using appears to be a truncated one due to the quirky
+behavior of the cos and sin functions, so what I did is likely not reproducible
+in other engines without using what would instead be considered the correct
+algorithm.
+
+### Engine limitations
+
+#### Screen size
+
+This is probably the most irritating of the setbacks that were faced. The
+limitation on the number of pixels that are given is a huge issue for this type
+of game specifically. It seems like 128x128 is just not enough to really give
+the player breathing room between them and the asteroids that are coming,
+especially at some of the higher velocities that I currently have them set at.
+
+If I was going to do this game over again, I would want probably at least
+600x400, which would probably give me enough to double the size of the objects
+in the game and still give the necessary breathing room and even add in the
+alien ships.
+
+#### Lack of built-ins
+
+The engine purposely gives a very small number of tools and allows the user to
+remake a lot of things by hand. This, coupled with the fact that there is a code
+size limitation, causes the developer to make choices in terms of what can be
+done.
+
+The issues that I ran into are trying to find the correct algorithms for things
+like collision, rotation, velocity, etc. Also trying to keep data in a sane way
+for all of the objects and access them.
+
+### Lua
+
+The engine uses the Lua language. The language itself has very little tools
+included purposefully in order to keep the language size down. Its syntax is
+also not the most easy to read either. It definitely felt like more of a
+hindrance than something that makes the engine shine. I feel like I would have
+had an easier time if I were working with Python for instance where I would have
+had classes and things, maybe even multiple file support.
 
 ## Code
 
@@ -584,19 +644,27 @@ end
 {{< / highlight >}}
 </details>
 
-# Analytics
-
-## Methodology
-
-### Tooling
-
-### Changes to Process
-
-## Results
-
 # Conclusion
 
+I was able to make a fully-functional version of Asteroids in a relatively small
+amount of code in a toy game engine. The game itself is a little aggravating to
+play due to the small resolution that the engine offers, but is good for some
+edge-of-your-seat gameplay as asteroids quickly fly passed.
+
+As a learning project, I feel like this was a great opportunity. There were
+several things, especially fundamental game making concepts, that I was able to
+touch such as holding state for the intro, gameplay, and game over screens.
+There are a number of things that I would do differently today with the
+knowledge that I gained from the project, but I believe that that is a very
+common thing in programming which only shows growth.
+
 ## Overall assessment
+
+I am proud of the finished product and also am happy that I took the time to
+learn what I did. I tried my best to first try things on my own before
+researching how others do things as a way to test myself. This retrofitting has
+caused some disjointed code and the single-file nature of the game files does
+not help this problem either.
 
 ## Things that could be better
 
@@ -616,6 +684,8 @@ like an Easy, Medium, and Hard mode selection would help with it dictating
 things like the number of lives that the user starts with and how big and how
 many asteroids are generated per level.
 
-## Applicability
+## Suggestible?
 
-## Suggestable?
+As a learning project, Asteroids is one of the better ones that I did. I would
+suggest others give it a shot and try their best to come up with efficient ways
+to add all of the functionality themselves.
