@@ -5,7 +5,11 @@ lastmod: 2023-03-27T18:58:30-07:00
 summary: "How to calculate rotation when presenting vector-based graphics"
 draft: false
 toc: true
-keywords: "programming, vector, graphics, games"
+keywords:
+- programming
+- vector
+- graphics
+- games
 ---
 
 ![Rotating spaceship](/vector-rotation/assets/rotation.gif)
