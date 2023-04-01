@@ -1,100 +1,21 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A random collection of stuff I didn&#39;t want to forget">
-    
-    <link rel="shortcut icon" href="https://vlek.github.io/favicon.ico">
-    
-    <link rel="stylesheet" href="/css/style.min.css">
-
-    <title>Properly Auto-mount Drives in Ubuntu</title>
-</head>
-<body><header id="banner">
-    <h2><a href="https://vlek.github.io">Vlek&#39;s Personal Blog</a></h2><br>
-    <i>A random collection of stuff I didn&#39;t want to forget</i>
-    <nav>
-        <ul>
-            
-        </ul>
-    </nav>
-</header>
-<main id="content">
-<section id="main">
-  <h1 id="title">Properly Auto-mount Drives in Ubuntu</h1>
-  <aside id="meta">
-    <h4 id="date"> Sun Sep 18, 2022 </h4>
-    <h5 id="wordcount"> 399 Words </h5>
-  </aside>
-  <div>
-    <article id="content">
-      
-
-      <h2 id="background">Background</h2>
-<p>SSDs are fast. However, large ones are still quite expensive and those insane
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="A random collection of stuff I didn't want to forget"><link rel="shortcut icon" href=https://vlek.github.io/favicon.ico><link rel=stylesheet href=/css/style.min.css><title>Properly Auto-mount Drives in Ubuntu</title></head><body><header id=banner><h2><a href=https://vlek.github.io>Vlek's Personal Blog</a></h2><br><i>A random collection of stuff I didn't want to forget</i><nav><ul></ul></nav></header><main id=content><section id=main><h1 id=title>Properly Auto-mount Drives in Ubuntu</h1><aside id=meta><h4 id=date>Sun Sep 18, 2022</h4><h5 id=wordcount>399 Words</h5></aside><div><article id=content><h2 id=background>Background</h2><p>SSDs are fast. However, large ones are still quite expensive and those insane
 read/write speeds are not necessary for all types of content anyway. For videos,
 music, and images, it could be much easier on the wallet to store those on a
 separate hard-drive, especially as HDD drives are relatively inexpensive and
-large.</p>
-<p>I personally use Linux, I prefer it over Windows for so many reasons. I tend to
+large.</p><p>I personally use Linux, I prefer it over Windows for so many reasons. I tend to
 use Ubuntu or Ubuntu-derivates, so this is geared towards that system
 specifically. I am unsure, but I believe that these steps may be applicable to
-other distros, but that is the one that I have tried this on multiple times.</p>
-<h2 id="steps">Steps</h2>
-<p>Please note that I am going to assume the folder that you wish to have the
+other distros, but that is the one that I have tried this on multiple times.</p><h2 id=steps>Steps</h2><p>Please note that I am going to assume the folder that you wish to have the
 contents of the mounted drive at will be called &lsquo;data&rsquo;. Please replace in the
-below instructions if you wish for the folder to have a different name.</p>
-<h3 id="1-connect-the-external-drive-to-the-ubuntu-pc">1. Connect the external drive to the Ubuntu PC.</h3>
-<h3 id="2-gather-drive-info">2. Gather drive info</h3>
-<ol>
-<li>Get the name of the drive using <code>sudo fdisk -l</code>
-<ol>
-<li>It is likely that the drive name will start with <code>/dev/sd</code>, confirm your
-selection by double-checking the drive size.</li>
-</ol>
-</li>
-<li>Get the UUID using <code>sudo blkid</code>
-<ol>
-<li>Using the drive name we got in the previous step, we can find the specific
-entry</li>
-</ol>
-</li>
-</ol>
-<h3 id="3-make-the-mount-point">3. Make the mount point</h3>
-<ol>
-<li><code>sudo mkdir /data</code>
+below instructions if you wish for the folder to have a different name.</p><h3 id=1-connect-the-external-drive-to-the-ubuntu-pc>1. Connect the external drive to the Ubuntu PC.</h3><h3 id=2-gather-drive-info>2. Gather drive info</h3><ol><li>Get the name of the drive using <code>sudo fdisk -l</code><ol><li>It is likely that the drive name will start with <code>/dev/sd</code>, confirm your
+selection by double-checking the drive size.</li></ol></li><li>Get the UUID using <code>sudo blkid</code><ol><li>Using the drive name we got in the previous step, we can find the specific
+entry</li></ol></li></ol><h3 id=3-make-the-mount-point>3. Make the mount point</h3><ol><li><code>sudo mkdir /data</code>
 1. Note that there are two ways to do this: either you create the folder
-under <code>/media/&lt;username&gt;/</code>, or you put it elsewhere. Placing it in the
+under <code>/media/&lt;username>/</code>, or you put it elsewhere. Placing it in the
 media folder will automatically allow that user to have read and write
 access to the mount point. If that is not what is desired or you would
 like other users to also be able to access those files, consider placing
-them elsewhere.</li>
-</ol>
-<h3 id="4-give-users-access-to-the-mount-point">4. Give users access to the mount point</h3>
-<ol>
-<li><code>sudo groupadd data</code></li>
-<li><code>sudo usermod -aG data &lt;username&gt;</code></li>
-<li><code>sudo chown -R :data /data</code></li>
-</ol>
-<h3 id="5-create-new-entry-in-fstab">5. Create new entry in <code>fstab</code>:</h3>
-<ol>
-<li><code>sudo vim /etc/fstab</code></li>
-<li>Add a new line in the format: <code>UUID=&lt;ID from blkid&gt; /data    auto nosuid,nodev,nofail,x-gvfs-show 0 0</code></li>
-<li>Test entry using <code>sudo mount -a</code>. If no errors, then the entry was added
-correctly and you are safe to reboot.</li>
-</ol>
-<h3 id="6-reboot">6. Reboot</h3>
-<p><br><br>
-After your computer is done rebooting, you should be able to navigate to the
+them elsewhere.</li></ol><h3 id=4-give-users-access-to-the-mount-point>4. Give users access to the mount point</h3><ol><li><code>sudo groupadd data</code></li><li><code>sudo usermod -aG data &lt;username></code></li><li><code>sudo chown -R :data /data</code></li></ol><h3 id=5-create-new-entry-in-fstab>5. Create new entry in <code>fstab</code>:</h3><ol><li><code>sudo vim /etc/fstab</code></li><li>Add a new line in the format: <code>UUID=&lt;ID from blkid> /data auto nosuid,nodev,nofail,x-gvfs-show 0 0</code></li><li>Test entry using <code>sudo mount -a</code>. If no errors, then the entry was added
+correctly and you are safe to reboot.</li></ol><h3 id=6-reboot>6. Reboot</h3><p><br><br>After your computer is done rebooting, you should be able to navigate to the
 location of the drive and see that it had automounted and that its contents are
-available to the users that were given access.</p>
-
-    </article>
-  </div>
-</section>
-
-        </main><footer id="footer">
-    Copyright © 2022 Vlek
-</footer>
-</body>
-</html>
+available to the users that were given access.</p></article></div></section></main><footer id=footer>Copyright © 2022 Vlek</footer></body></html>

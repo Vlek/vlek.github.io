@@ -1,70 +1,4 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A random collection of stuff I didn&#39;t want to forget">
-    
-    <link rel="shortcut icon" href="https://vlek.github.io/favicon.ico">
-    
-    <link rel="stylesheet" href="/css/style.min.css">
-
-    <title>Remaking Asteroids</title>
-</head>
-<body><header id="banner">
-    <h2><a href="https://vlek.github.io">Vlek&#39;s Personal Blog</a></h2><br>
-    <i>A random collection of stuff I didn&#39;t want to forget</i>
-    <nav>
-        <ul>
-            
-        </ul>
-    </nav>
-</header>
-<main id="content">
-<section id="main">
-  <h1 id="title">Remaking Asteroids</h1>
-  <aside id="meta">
-    <h4 id="date"> Wed Mar 15, 2023 </h4>
-    <h5 id="wordcount"> 3047 Words </h5>
-  </aside>
-  <div>
-    <article id="content">
-      
-        <h1>Table of Contents</h1>
-
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#environment-setup">Environment Setup</a>
-      <ul>
-        <li><a href="#moving-to-atom">Moving to Atom</a></li>
-        <li><a href="#auto-update-and-play">Auto-update and play</a></li>
-      </ul>
-    </li>
-    <li><a href="#solution-design">Solution Design</a></li>
-    <li><a href="#implementation">Implementation</a>
-      <ul>
-        <li><a href="#creating-the-players-spaceship">Creating the player&rsquo;s spaceship</a></li>
-        <li><a href="#adding-asteroids">Adding asteroids</a></li>
-        <li><a href="#handling-collisions">Handling collisions</a></li>
-        <li><a href="#handling-movement">Handling movement</a></li>
-        <li><a href="#setbacks">Setbacks</a></li>
-        <li><a href="#code">Code</a></li>
-      </ul>
-    </li>
-    <li><a href="#conclusion">Conclusion</a>
-      <ul>
-        <li><a href="#overall-assessment">Overall assessment</a></li>
-        <li><a href="#things-that-could-be-better">Things that could be better</a></li>
-        <li><a href="#suggestible">Suggestible?</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-      
-
-      <iframe src="https://www.lexaloffle.com/bbs/widget.php?pid=22904" allowfullscreen width="621" height="513" style="border:none; overflow:hidden"></iframe>
-<h1 id="introduction">Introduction</h1>
-<p>Asteroids, the space shooter game originally developed by Atari in 1979, has an iconic visual style
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="A random collection of stuff I didn't want to forget"><link rel="shortcut icon" href=https://vlek.github.io/favicon.ico><link rel=stylesheet href=/css/style.min.css><title>Remaking Asteroids</title></head><body><header id=banner><h2><a href=https://vlek.github.io>Vlek's Personal Blog</a></h2><br><i>A random collection of stuff I didn't want to forget</i><nav><ul></ul></nav></header><main id=content><section id=main><h1 id=title>Remaking Asteroids</h1><aside id=meta><h4 id=date>Wed Mar 15, 2023</h4><h5 id=wordcount>3047 Words</h5></aside><div><article id=content><h1>Table of Contents</h1><nav id=TableOfContents><ul><li><a href=#introduction>Introduction</a></li><li><a href=#environment-setup>Environment Setup</a><ul><li><a href=#moving-to-atom>Moving to Atom</a></li><li><a href=#auto-update-and-play>Auto-update and play</a></li></ul></li><li><a href=#solution-design>Solution Design</a></li><li><a href=#implementation>Implementation</a><ul><li><a href=#creating-the-players-spaceship>Creating the player&rsquo;s spaceship</a></li><li><a href=#adding-asteroids>Adding asteroids</a></li><li><a href=#handling-collisions>Handling collisions</a></li><li><a href=#handling-movement>Handling movement</a></li><li><a href=#setbacks>Setbacks</a></li><li><a href=#code>Code</a></li></ul></li><li><a href=#conclusion>Conclusion</a><ul><li><a href=#overall-assessment>Overall assessment</a></li><li><a href=#things-that-could-be-better>Things that could be better</a></li><li><a href=#suggestible>Suggestible?</a></li></ul></li></ul></nav><iframe src="https://www.lexaloffle.com/bbs/widget.php?pid=22904" allowfullscreen width=621 height=513 style=border:none;overflow:hidden></iframe><h1 id=introduction>Introduction</h1><p>Asteroids, the space shooter game originally developed by Atari in 1979, has an iconic visual style
 and gameplay that has seen many revisions and spawned an entire genre of video games
 under the top-down shooter moniker. Due to its simple design and appeal, it is
 appealing to programmers to recreate the classic game in an attempt
@@ -72,76 +6,52 @@ to get a better understanding of game making principles, including vector
 graphics, velocity, and handling state including from the new game
 screen, the gameplay, and a game over screen along with the in-game state of
 having multiple objects moving around and interacting with each other through
-collision detection.</p>
-<p>In this article, I will be going over my implementation of the classic Asteroids
+collision detection.</p><p>In this article, I will be going over my implementation of the classic Asteroids
 game and detailing the things that I learned along the way, including tidbits
-regarding the Pico-8 game engine that I used to do it.</p>
-<h1 id="environment-setup">Environment Setup</h1>
-<p>First thing is first, I needed to get my tooling set up in a way that would make
+regarding the Pico-8 game engine that I used to do it.</p><h1 id=environment-setup>Environment Setup</h1><p>First thing is first, I needed to get my tooling set up in a way that would make
 the game development easier than working within Pico-8. While the game engine
 does provide an editor, it lacks a lot of features that would make programming
 easier, including syntax highlighting, warnings and error notifications, and
-smart indent/outdent along with a host of macros.</p>
-<h2 id="moving-to-atom">Moving to Atom</h2>
-<p>During the time that I was working on this, Atom had a vibrant community and
+smart indent/outdent along with a host of macros.</p><h2 id=moving-to-atom>Moving to Atom</h2><p>During the time that I was working on this, Atom had a vibrant community and
 included the necessary configurations to make Pico-8 development easier. This
 IDE made single-file editing a breeze and even came with a theme to make the IDE
 appear Pico-8-like if that was the developer&rsquo;s choice. There was also a plugin
 available so that the IDE would recognize the underlying helper Lua functions
-and global variables that the engine provided.</p>
-<p>I had even done a write-up where others weighed in on the configuration that I
+and global variables that the engine provided.</p><p>I had even done a write-up where others weighed in on the configuration that I
 had done, adding to the conversation with me updating my post to include other
-insights that the community had included which helped me further hone my IDE.</p>
-<h2 id="auto-update-and-play">Auto-update and play</h2>
-<p>One thing that the Pico-8 IDE allowed for that was hard to get working outside
+insights that the community had included which helped me further hone my IDE.</p><h2 id=auto-update-and-play>Auto-update and play</h2><p>One thing that the Pico-8 IDE allowed for that was hard to get working outside
 of it was a macro so that the file could be saved and opened in Pico-8 to begin
 play testing. Through some configuration changes, I was able to get Atom to have
 this feature as well and bound it to Ctrl + F5 like one would normally for
-running a currently open project.</p>
-<h1 id="solution-design">Solution Design</h1>
-<p>During this time, I was much less focused on solutioning. I went into it knowing
+running a currently open project.</p><h1 id=solution-design>Solution Design</h1><p>During this time, I was much less focused on solutioning. I went into it knowing
 that there were parts that I was going to need to add and then sought to add
 them in chunks as I finished them. The main parts that I sought to add were a
 spaceship that the user controlled with the left/right rotation and the ability
 to increase velocity with the acceleration button, randomly generated asteroids,
 and the ability to fire one&rsquo;s weapon and have it destroy asteroids that it came
 in contact with which would crease pieces of itself until it eventually
-disintegrated.</p>
-<p>Having done a few Pico-8 games in the past, I was aware that I was going to need
+disintegrated.</p><p>Having done a few Pico-8 games in the past, I was aware that I was going to need
 to use both the Update and Draw functions in order to both accept user input and
-have the game state reflected on the screen.</p>
-<h1 id="implementation">Implementation</h1>
-<p><img src="/remaking-asteroids/images/asteroids_start_screen.png" alt="Start Screen"></p>
-<h2 id="creating-the-players-spaceship">Creating the player&rsquo;s spaceship</h2>
-<p>First thing is first, the player needs to be able to take control of a spaceship
+have the game state reflected on the screen.</p><h1 id=implementation>Implementation</h1><p><img src=/remaking-asteroids/images/asteroids_start_screen.png alt="Start Screen"></p><h2 id=creating-the-players-spaceship>Creating the player&rsquo;s spaceship</h2><p>First thing is first, the player needs to be able to take control of a spaceship
 in order to destroy asteroids. I felt like this was as good a place as any to
 start with. I first went with creating my three-line spaceship and set it so that
 it was facing up. I would then use 360 degrees as a method of having it rotate
-in place.</p>
-<p>Little did I know ahead of time that this was going to involve calculus in order
+in place.</p><p>Little did I know ahead of time that this was going to involve calculus in order
 to do the rotation of the spaceship. I was trying to reinvent the wheel myself
 while not having the underlying math necessary to really be able to do what it
 was that I was setting out to do. I had tried a number of things to see if I
 could challenge myself, and I made some funny mistakes that really got me
 excited about the possibility of doing this sort of math for vector-based
 graphics. In one instance, I had the spaceship rotating and warping in and out
-of view as though it was traveling across the face of an invisible ball.</p>
-<p>For my article related to rotation, <a href="/vector-rotation/">click here</a></p>
-<h2 id="adding-asteroids">Adding asteroids</h2>
-<p>Asteroids are added based on the level number. Additional asteroids are given
+of view as though it was traveling across the face of an invisible ball.</p><p>For my article related to rotation, <a href=/vector-rotation/>click here</a></p><h2 id=adding-asteroids>Adding asteroids</h2><p>Asteroids are added based on the level number. Additional asteroids are given
 for higher levels with a maximum of four big ones being given at high enough
 levels. This is due to the small screen real estate and something that could and
 very likely should be dialed in further, even with smaller asteroids thrown into
-the mix.</p>
-<h2 id="handling-collisions">Handling collisions</h2>
-<p>While it will cause collisions when not strictly correct, I am using
+the mix.</p><h2 id=handling-collisions>Handling collisions</h2><p>While it will cause collisions when not strictly correct, I am using
 circle/circle collision detection. What this means is that, the spaceship is
 touching an asteroid if it&rsquo;s the case that the midpoints of the two objects are
-close enough that their radius&rsquo; are overlapping.</p>
-<p>This works a lot better for things that are more circular, such as the shots
-that the ship fires.</p>
-<h2 id="handling-movement">Handling movement</h2>
-<p>Velocity was a fun concept to try to deal with. I found a good article that went
+close enough that their radius&rsquo; are overlapping.</p><p>This works a lot better for things that are more circular, such as the shots
+that the ship fires.</p><h2 id=handling-movement>Handling movement</h2><p>Velocity was a fun concept to try to deal with. I found a good article that went
 over how to handle it, but the basic concept is that, for each item that the
 developer wishes to have move, it needs to have both an X and Y velocity amount
 that is either positive or negative that reflects how fast the given item is
@@ -149,553 +59,513 @@ moving in that direction. During the game&rsquo;s update function, that amount i
 either increased, decreased, or remains the same based on the rules of the
 object and whether anything is acting upon it (think the player&rsquo;s input of the
 velocity button increasing the velocity of the ship in the direction it is
-pointing.)</p>
-<p>Thankfully for me, while I was working on things, I came to the realization that
+pointing.)</p><p>Thankfully for me, while I was working on things, I came to the realization that
 the bit of code that was handling the collision detection as well as the
 movement were both generalizable to all of the objects in the game. Each thing,
 including the graphical bits of the asteroids and spaceship that are generated
-on a collision, are all moved using the same code!</p>
-<p>For my article related to velocity, <a href="/velocity/">click here</a>.</p>
-<h2 id="setbacks">Setbacks</h2>
-<h3 id="rotation">Rotation</h3>
-<p>As noted in my <a href="/vector-rotation/">article</a> on rotation,
+on a collision, are all moved using the same code!</p><p>For my article related to velocity, <a href=/velocity/>click here</a>.</p><h2 id=setbacks>Setbacks</h2><h3 id=rotation>Rotation</h3><p>As noted in my <a href=/vector-rotation/>article</a> on rotation,
 there were some quirks in the Pico-8 engine which caused the actual algorithm
 that I am using to be different than the standard one that would generally be
 used. The one that I am using appears to be a truncated one due to the quirky
 behavior of the cos and sin functions, so what I did is likely not reproducible
 in other engines without using what would instead be considered the correct
-algorithm.</p>
-<h3 id="engine-limitations">Engine limitations</h3>
-<h4 id="screen-size">Screen size</h4>
-<p>This is probably the most irritating of the setbacks that were faced. The
+algorithm.</p><h3 id=engine-limitations>Engine limitations</h3><h4 id=screen-size>Screen size</h4><p>This is probably the most irritating of the setbacks that were faced. The
 limitation on the number of pixels that are given is a huge issue for this type
 of game specifically. It seems like 128x128 is just not enough to really give
 the player breathing room between them and the asteroids that are coming,
-especially at some of the higher velocities that I currently have them set at.</p>
-<p>If I was going to do this game over again, I would want probably at least
+especially at some of the higher velocities that I currently have them set at.</p><p>If I was going to do this game over again, I would want probably at least
 600x400, which would probably give me enough to double the size of the objects
 in the game and still give the necessary breathing room and even add in the
-alien ships.</p>
-<h4 id="lack-of-built-ins">Lack of built-ins</h4>
-<p>The engine purposely gives a very small number of tools and allows the user to
+alien ships.</p><h4 id=lack-of-built-ins>Lack of built-ins</h4><p>The engine purposely gives a very small number of tools and allows the user to
 remake a lot of things by hand. This, coupled with the fact that there is a code
 size limitation, causes the developer to make choices in terms of what can be
-done.</p>
-<p>The issues that I ran into are trying to find the correct algorithms for things
+done.</p><p>The issues that I ran into are trying to find the correct algorithms for things
 like collision, rotation, velocity, etc. Also trying to keep data in a sane way
-for all of the objects and access them.</p>
-<h3 id="lua">Lua</h3>
-<p>The engine uses the Lua language. The language itself has very little tools
+for all of the objects and access them.</p><h3 id=lua>Lua</h3><p>The engine uses the Lua language. The language itself has very little tools
 included purposefully in order to keep the language size down. Its syntax is
 also not the most easy to read either. It definitely felt like more of a
 hindrance than something that makes the engine shine. I feel like I would have
 had an easier time if I were working with Python for instance where I would have
-had classes and things, maybe even multiple file support.</p>
-<h2 id="code">Code</h2>
-<details>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#6272a4">-- asteroids</span>
-</span></span><span style="display:flex;"><span><span style="color:#6272a4">-- by vlek</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>tick <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>blink <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
-</span></span><span style="display:flex;"><span>explosion_colors <span style="color:#ff79c6">=</span> {<span style="color:#bd93f9">6</span>,<span style="color:#bd93f9">7</span>,<span style="color:#bd93f9">12</span>}
-</span></span><span style="display:flex;"><span>game <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>player <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>laser_shots <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>asteroids <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>explosions <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>brighter <span style="color:#ff79c6">=</span> {<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">14</span>,<span style="color:#bd93f9">11</span>,<span style="color:#bd93f9">9</span>,<span style="color:#bd93f9">13</span>,<span style="color:#bd93f9">7</span>,<span style="color:#bd93f9">7</span>,<span style="color:#bd93f9">14</span>,<span style="color:#bd93f9">10</span>,<span style="color:#bd93f9">7</span>,<span style="color:#bd93f9">7</span>,<span style="color:#bd93f9">7</span>,<span style="color:#bd93f9">6</span>,<span style="color:#bd93f9">15</span>,<span style="color:#bd93f9">7</span>}
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">line</span>(x1,y1,x2,y2,c)
-</span></span><span style="display:flex;"><span>  dx<span style="color:#ff79c6">=</span>x2<span style="color:#ff79c6">-</span>x1
-</span></span><span style="display:flex;"><span>  dy<span style="color:#ff79c6">=</span>y2<span style="color:#ff79c6">-</span>y1
-</span></span><span style="display:flex;"><span>  len<span style="color:#ff79c6">=</span> sqrt(dx<span style="color:#ff79c6">*</span>dx<span style="color:#ff79c6">+</span>dy<span style="color:#ff79c6">*</span>dy)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> len !<span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> f<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>,len,<span style="color:#bd93f9">0.3</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>      x<span style="color:#ff79c6">=</span>x1<span style="color:#ff79c6">+</span>dx<span style="color:#ff79c6">*</span>f<span style="color:#ff79c6">/</span>len<span style="color:#ff79c6">+</span><span style="color:#bd93f9">0.5</span>
-</span></span><span style="display:flex;"><span>      y<span style="color:#ff79c6">=</span>y1<span style="color:#ff79c6">+</span>dy<span style="color:#ff79c6">*</span>f<span style="color:#ff79c6">/</span>len<span style="color:#ff79c6">+</span><span style="color:#bd93f9">0.5</span>
-</span></span><span style="display:flex;"><span>      pset(x,y,brighter[pget(x,y)<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>])
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">_init</span>()
-</span></span><span style="display:flex;"><span>  game_menu()
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">_draw</span>()
-</span></span><span style="display:flex;"><span>  game.draw()
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">_update</span>()
-</span></span><span style="display:flex;"><span>  game.update()
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">game_menu</span>()
-</span></span><span style="display:flex;"><span>  generate_asteroids(<span style="color:#bd93f9">8</span>)
-</span></span><span style="display:flex;"><span>  game.update <span style="color:#ff79c6">=</span> menu_update
-</span></span><span style="display:flex;"><span>  game.draw <span style="color:#ff79c6">=</span> draw_menu
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">menu_update</span>()
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> i<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> btnp(i) <span style="color:#ff79c6">then</span> new_game() <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> asteroid <span style="color:#ff79c6">in</span> all(asteroids) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    do_move(asteroid)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  do_tick()
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">draw_menu</span>()
-</span></span><span style="display:flex;"><span>  cls()
-</span></span><span style="display:flex;"><span>  rectfill(<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">128</span>,<span style="color:#bd93f9">128</span>,<span style="color:#bd93f9">1</span>)
-</span></span><span style="display:flex;"><span>  draw_asteroids()
-</span></span><span style="display:flex;"><span>  centerprint(<span style="color:#f1fa8c">&#39;asteroids&#39;</span>,<span style="color:#bd93f9">64</span>,<span style="color:#bd93f9">36</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> blink <span style="color:#ff79c6">then</span> centerprint(<span style="color:#f1fa8c">&#39;press any button to start&#39;</span>,<span style="color:#bd93f9">64</span>,<span style="color:#bd93f9">94</span>) <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">new_game</span>()
-</span></span><span style="display:flex;"><span>  player <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  player.x <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>
-</span></span><span style="display:flex;"><span>  player.y <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>
-</span></span><span style="display:flex;"><span>  player.vx <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.vy <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.thrust <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0.1</span>
-</span></span><span style="display:flex;"><span>  player.max_thrust <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">4</span>
-</span></span><span style="display:flex;"><span>  player.facing_angle <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">275</span>
-</span></span><span style="display:flex;"><span>  player.score1 <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.score2 <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.lives <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">4</span>
-</span></span><span style="display:flex;"><span>  player.level <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.level_display_counter <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.ticks_until_next_level <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">60</span>
-</span></span><span style="display:flex;"><span>  player.isdead <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
-</span></span><span style="display:flex;"><span>  player.ticks_until_respawn <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">90</span>
-</span></span><span style="display:flex;"><span>  player.isinvulnerable <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
-</span></span><span style="display:flex;"><span>  player.invulnerability_counter <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">60</span>
-</span></span><span style="display:flex;"><span>  laser_shots <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  asteroids <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  explosions <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  game.update <span style="color:#ff79c6">=</span> game_update
-</span></span><span style="display:flex;"><span>  game.draw <span style="color:#ff79c6">=</span> game_draw
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">game_update</span>()
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> explosion <span style="color:#ff79c6">in</span> all(explosions) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> explosion.steps <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">10</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      explosion.steps <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">for</span> bit <span style="color:#ff79c6">in</span> all(explosion.bits) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>        do_move(bit)
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      del(explosions, explosion)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> laser_beam <span style="color:#ff79c6">in</span> all(laser_shots) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">-- check for collisions with asteroids</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> collided <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> asteroid <span style="color:#ff79c6">in</span> all(asteroids) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> check_collision(laser_beam.x,laser_beam.y,asteroid.x,asteroid.y,<span style="color:#bd93f9">2</span>,asteroid.collision_size) <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        collided <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
-</span></span><span style="display:flex;"><span>        asteroid_collision(asteroid)
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">break</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> collided <span style="color:#ff79c6">or</span> laser_beam.movement_count <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">29</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      del(laser_shots, laser_beam)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      do_move(laser_beam)
-</span></span><span style="display:flex;"><span>      laser_beam.movement_count <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">#</span>asteroids <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> asteroid <span style="color:#ff79c6">in</span> all(asteroids) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#6272a4">-- check for collision with player spaceship</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> check_collision(player.x,player.y,asteroid.x,asteroid.y,<span style="color:#bd93f9">4</span>,asteroid.collision_size) <span style="color:#ff79c6">and</span> <span style="color:#ff79c6">not</span> player.isdead <span style="color:#ff79c6">and</span> <span style="color:#ff79c6">not</span> player.isinvulnerable <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        asteroid_collision(asteroid)
-</span></span><span style="display:flex;"><span>        player_collision()
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>        do_move(asteroid)
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- if there are no more asteroids, then spawn more</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> player.ticks_until_next_level <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      player.level <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>      player.level_display_counter <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">60</span>
-</span></span><span style="display:flex;"><span>      level_asteroids <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> player.level <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        level_asteroids <span style="color:#ff79c6">+=</span> player.level
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>        level_asteroids <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>      generate_asteroids(level_asteroids)
-</span></span><span style="display:flex;"><span>      player.ticks_until_next_level <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">90</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      player.ticks_until_next_level <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  do_move(player)
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- we&#39;re only tracking button presses when the player is alive</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> player.isdead <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> btn(<span style="color:#bd93f9">0</span>) <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      player.facing_angle <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">5</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> player.facing_angle <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">360</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        player.facing_angle <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">360</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> btn(<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      player.facing_angle <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">5</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> player.facing_angle <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        player.facing_angle <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">360</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> btn(<span style="color:#bd93f9">2</span>) <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#6272a4">-- update velocity and v-angle</span>
-</span></span><span style="display:flex;"><span>      player.vx <span style="color:#ff79c6">=</span> mid(<span style="color:#ff79c6">-</span>player.max_thrust,
-</span></span><span style="display:flex;"><span>                      player.vx <span style="color:#ff79c6">+</span> cos(player.facing_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>) <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">-</span>player.thrust,
-</span></span><span style="display:flex;"><span>                      player.max_thrust)
-</span></span><span style="display:flex;"><span>      player.vy <span style="color:#ff79c6">=</span> mid(<span style="color:#ff79c6">-</span>player.max_thrust,
-</span></span><span style="display:flex;"><span>                      player.vy <span style="color:#ff79c6">+</span> sin(player.facing_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>) <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">-</span>player.thrust,
-</span></span><span style="display:flex;"><span>                      player.max_thrust)
-</span></span><span style="display:flex;"><span>      sfx(<span style="color:#bd93f9">1</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#6272a4">-- otherwise, we&#39;re going to apply the space breaks (physics be damned)</span>
-</span></span><span style="display:flex;"><span>      player.vx <span style="color:#ff79c6">*=</span> <span style="color:#bd93f9">0.99</span>
-</span></span><span style="display:flex;"><span>      player.vy <span style="color:#ff79c6">*=</span> <span style="color:#bd93f9">0.99</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">-- if they&#39;re trying to shoot and they have less than five bullets on screen,</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> btnp(<span style="color:#bd93f9">4</span>) <span style="color:#ff79c6">and</span> <span style="color:#ff79c6">#</span>laser_shots <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">local</span> nose_angle <span style="color:#ff79c6">=</span> player.facing_angle <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">180</span>
-</span></span><span style="display:flex;"><span>      shoot(player.x <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> cos(nose_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>),
-</span></span><span style="display:flex;"><span>            player.y <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">5</span> <span style="color:#ff79c6">*</span> sin(nose_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>),
-</span></span><span style="display:flex;"><span>            cos(player.facing_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>) <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span>,
-</span></span><span style="display:flex;"><span>            sin(player.facing_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>) <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">-</span><span style="color:#bd93f9">2</span>)
-</span></span><span style="display:flex;"><span>      sfx(<span style="color:#bd93f9">0</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> player.invulnerability_counter <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      player.invulnerability_counter <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> player.invulnerability_counter <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        player.isinvulnerable <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">-- if we have no more lives, game over</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> player.lives <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> player.ticks_until_respawn <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">for</span> i<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">if</span> btnp(i) <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>            new_game()
-</span></span><span style="display:flex;"><span>            <span style="color:#ff79c6">break</span>
-</span></span><span style="display:flex;"><span>          <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>        player.ticks_until_respawn <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> player.ticks_until_respawn <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        player.isdead <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>        player.ticks_until_respawn <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> player.level_display_counter <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span> player.level_display_counter <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  do_tick()
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">game_draw</span>()
-</span></span><span style="display:flex;"><span>  cls()
-</span></span><span style="display:flex;"><span>  rectfill(<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">128</span>,<span style="color:#bd93f9">128</span>,<span style="color:#bd93f9">1</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> explosion <span style="color:#ff79c6">in</span> all(explosions) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> bit <span style="color:#ff79c6">in</span> all(explosion.bits) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>      pset(bit.x,bit.y,bit.color)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> laser_beam <span style="color:#ff79c6">in</span> all(laser_shots) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    circfill(laser_beam.x,laser_beam.y,<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  draw_asteroids()
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- we&#39;re only going to draw the spaceship if the player isn&#39;t dead</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> player.isdead <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> player.lives <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> blink <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        centerprint(<span style="color:#f1fa8c">&#39;game over&#39;</span>,<span style="color:#bd93f9">64</span>,<span style="color:#bd93f9">36</span>,<span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>      centerprint(<span style="color:#f1fa8c">&#39;play again?&#39;</span>,<span style="color:#bd93f9">64</span>,<span style="color:#bd93f9">85</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> <span style="color:#ff79c6">not</span> player.isinvulnerable <span style="color:#ff79c6">or</span> player.isinvulnerable <span style="color:#ff79c6">and</span> tick<span style="color:#ff79c6">%</span><span style="color:#bd93f9">15</span><span style="color:#ff79c6">&gt;</span><span style="color:#bd93f9">7</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      draw_spaceship(player.x, player.y, player.facing_angle)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> player.level_display_counter <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#8be9fd;font-style:italic">local</span> level_string <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#39;level &#39;</span><span style="color:#ff79c6">..</span>player.level
-</span></span><span style="display:flex;"><span>      print(level_string,<span style="color:#bd93f9">64</span><span style="color:#ff79c6">-#</span>level_string<span style="color:#ff79c6">*</span><span style="color:#bd93f9">4</span><span style="color:#ff79c6">/</span><span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">36</span>,<span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  print_score()
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> i<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>,player.lives<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    draw_spaceship(i<span style="color:#ff79c6">*</span><span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">11</span>,<span style="color:#bd93f9">271</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">--print(&#39;2016 vlek&#39;,45,122)</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">draw_spaceship</span>(x_coord, y_coord, ship_angle)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> nose_angle <span style="color:#ff79c6">=</span> ship_angle <span style="color:#ff79c6">-</span> <span style="color:#bd93f9">180</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> nose_x_coord <span style="color:#ff79c6">=</span> x_coord <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">*</span> cos(nose_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> nose_y_coord <span style="color:#ff79c6">=</span> y_coord <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">*</span> sin(nose_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> line_points <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> angle <span style="color:#ff79c6">in</span> all({<span style="color:#bd93f9">30</span>,<span style="color:#ff79c6">-</span><span style="color:#bd93f9">30</span>}) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> x <span style="color:#ff79c6">=</span> x_coord <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">*</span> cos((ship_angle <span style="color:#ff79c6">+</span> angle)<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> y <span style="color:#ff79c6">=</span> y_coord <span style="color:#ff79c6">+</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">*</span> sin((ship_angle <span style="color:#ff79c6">+</span> angle)<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>)
-</span></span><span style="display:flex;"><span>    add(line_points, {x,y})
-</span></span><span style="display:flex;"><span>    line(nose_x_coord,nose_y_coord,x,y,<span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- connect the two legs of the spaceship</span>
-</span></span><span style="display:flex;"><span>  line(line_points[<span style="color:#bd93f9">1</span>][<span style="color:#bd93f9">1</span>],line_points[<span style="color:#bd93f9">1</span>][<span style="color:#bd93f9">2</span>],line_points[<span style="color:#bd93f9">2</span>][<span style="color:#bd93f9">1</span>],line_points[<span style="color:#bd93f9">2</span>][<span style="color:#bd93f9">2</span>],<span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">draw_asteroids</span>()
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> asteroid <span style="color:#ff79c6">in</span> all(asteroids) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> point<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>,<span style="color:#ff79c6">#</span>asteroid.points<span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>      line(asteroid.points[point][<span style="color:#bd93f9">1</span>]<span style="color:#ff79c6">+</span>asteroid.x,
-</span></span><span style="display:flex;"><span>           asteroid.points[point][<span style="color:#bd93f9">2</span>]<span style="color:#ff79c6">+</span>asteroid.y,
-</span></span><span style="display:flex;"><span>           asteroid.points[point<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>][<span style="color:#bd93f9">1</span>]<span style="color:#ff79c6">+</span>asteroid.x,
-</span></span><span style="display:flex;"><span>           asteroid.points[point<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>][<span style="color:#bd93f9">2</span>]<span style="color:#ff79c6">+</span>asteroid.y,
-</span></span><span style="display:flex;"><span>           <span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">-- lastly, draw the line between the first and last points:</span>
-</span></span><span style="display:flex;"><span>    line(asteroid.points[<span style="color:#bd93f9">1</span>][<span style="color:#bd93f9">1</span>]<span style="color:#ff79c6">+</span>asteroid.x,
-</span></span><span style="display:flex;"><span>         asteroid.points[<span style="color:#bd93f9">1</span>][<span style="color:#bd93f9">2</span>]<span style="color:#ff79c6">+</span>asteroid.y,
-</span></span><span style="display:flex;"><span>         asteroid.points[<span style="color:#ff79c6">#</span>asteroid.points][<span style="color:#bd93f9">1</span>]<span style="color:#ff79c6">+</span>asteroid.x,
-</span></span><span style="display:flex;"><span>         asteroid.points[<span style="color:#ff79c6">#</span>asteroid.points][<span style="color:#bd93f9">2</span>]<span style="color:#ff79c6">+</span>asteroid.y,<span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">shoot</span>(x, y, vx, vy)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> laser_beam <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  laser_beam.x <span style="color:#ff79c6">=</span> x
-</span></span><span style="display:flex;"><span>  laser_beam.y <span style="color:#ff79c6">=</span> y
-</span></span><span style="display:flex;"><span>  laser_beam.vx <span style="color:#ff79c6">=</span> vx
-</span></span><span style="display:flex;"><span>  laser_beam.vy <span style="color:#ff79c6">=</span> vy
-</span></span><span style="display:flex;"><span>  laser_beam.movement_count <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  add(laser_shots, laser_beam)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">do_move</span>(obj)
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- perform movement:</span>
-</span></span><span style="display:flex;"><span>  obj.x <span style="color:#ff79c6">+=</span> obj.vx
-</span></span><span style="display:flex;"><span>  obj.y <span style="color:#ff79c6">+=</span> obj.vy
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- if we&#39;re out of screen bounds, throw us back in on the other side:</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> axis <span style="color:#ff79c6">in</span> all({<span style="color:#f1fa8c">&#39;x&#39;</span>,<span style="color:#f1fa8c">&#39;y&#39;</span>}) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> obj[axis] <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      obj[axis] <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">128</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">elseif</span> obj[axis] <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">128</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      obj[axis] <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">128</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">do_tick</span>()
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> tick <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">29</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    tick <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    tick <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> blink <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      blink <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">false</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      blink <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">randint</span>(min, max)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> range<span style="color:#ff79c6">=</span>(max<span style="color:#ff79c6">+</span><span style="color:#bd93f9">1</span>)<span style="color:#ff79c6">-</span>min
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> flr(rnd(range)<span style="color:#ff79c6">+</span>min)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">randfloat</span>(max)
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- this is really misleading, but it gives a positive or a negative</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- float up to but not including the maximum</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> randint(<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> rnd(max)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> rnd(max) <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">-</span><span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">create_asteroid</span>(x,y,vx,vy,size)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> asteroid <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  asteroid.x <span style="color:#ff79c6">=</span> x
-</span></span><span style="display:flex;"><span>  asteroid.y <span style="color:#ff79c6">=</span> y
-</span></span><span style="display:flex;"><span>  asteroid.vx <span style="color:#ff79c6">=</span> vx
-</span></span><span style="display:flex;"><span>  asteroid.vy <span style="color:#ff79c6">=</span> vy
-</span></span><span style="display:flex;"><span>  asteroid.size <span style="color:#ff79c6">=</span> size
-</span></span><span style="display:flex;"><span>  asteroid.points <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  asteroid.collision_size <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> degrees <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">360</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">while</span> degrees <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> degrees <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">30</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      degrees <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      degrees <span style="color:#ff79c6">-=</span> randint(<span style="color:#bd93f9">20</span>,<span style="color:#bd93f9">50</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> new_x <span style="color:#ff79c6">=</span> randint(size<span style="color:#ff79c6">/</span><span style="color:#bd93f9">2</span>,size)
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> dx <span style="color:#ff79c6">=</span> new_x <span style="color:#ff79c6">*</span> cos(degrees<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> new_y <span style="color:#ff79c6">=</span> randint(size<span style="color:#ff79c6">/</span><span style="color:#bd93f9">2</span>,size)
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> dy <span style="color:#ff79c6">=</span> new_y <span style="color:#ff79c6">*</span> sin(degrees<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> v <span style="color:#ff79c6">in</span> all({new_x, new_y}) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">if</span> v <span style="color:#ff79c6">&gt;</span> asteroid.collision_size <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>        asteroid.collision_size <span style="color:#ff79c6">=</span> v
-</span></span><span style="display:flex;"><span>      <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    add(asteroid.points, {dx,dy})
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  add(asteroids, asteroid)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">create_explosion</span>(x,y)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> explosion <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  explosion.x <span style="color:#ff79c6">=</span> x
-</span></span><span style="display:flex;"><span>  explosion.y <span style="color:#ff79c6">=</span> y
-</span></span><span style="display:flex;"><span>  explosion.bits <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> i<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>,randint(<span style="color:#bd93f9">5</span>,<span style="color:#bd93f9">9</span>),<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> bit <span style="color:#ff79c6">=</span> {}
-</span></span><span style="display:flex;"><span>    bit.x <span style="color:#ff79c6">=</span> x
-</span></span><span style="display:flex;"><span>    bit.y <span style="color:#ff79c6">=</span> y
-</span></span><span style="display:flex;"><span>    bit.vx <span style="color:#ff79c6">=</span> randfloat(<span style="color:#bd93f9">2</span>)
-</span></span><span style="display:flex;"><span>    bit.vy <span style="color:#ff79c6">=</span> randfloat(<span style="color:#bd93f9">2</span>)
-</span></span><span style="display:flex;"><span>    bit.color <span style="color:#ff79c6">=</span> explosion_colors[randint(<span style="color:#bd93f9">1</span>,<span style="color:#ff79c6">#</span>explosion_colors)]
-</span></span><span style="display:flex;"><span>    add(explosion.bits, bit)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  explosion.steps <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  add(explosions, explosion)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">check_collision</span>(x1,y1,x2,y2,rad1,rad2)
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- check collision for two objects based on central points and radii</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">return</span> rad1<span style="color:#ff79c6">+</span>rad2 <span style="color:#ff79c6">&gt;=</span> sqrt((x2<span style="color:#ff79c6">-</span>x1)<span style="color:#ff79c6">^</span><span style="color:#bd93f9">2</span><span style="color:#ff79c6">+</span>(y2<span style="color:#ff79c6">-</span>y1)<span style="color:#ff79c6">^</span><span style="color:#bd93f9">2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">generate_asteroids</span>(asteroid_count)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> pico<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>,asteroid_count,<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> x <span style="color:#ff79c6">=</span> randint(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">127</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#8be9fd;font-style:italic">local</span> y <span style="color:#ff79c6">=</span> randint(<span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">127</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> randint(<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">1</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      y <span style="color:#ff79c6">=</span> randint(<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">127</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>      x <span style="color:#ff79c6">=</span> randint(<span style="color:#bd93f9">0</span>,<span style="color:#bd93f9">1</span>) <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">127</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>    create_asteroid(x,y,randfloat(<span style="color:#bd93f9">1</span>),randfloat(<span style="color:#bd93f9">1</span>),<span style="color:#bd93f9">8</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">asteroid_collision</span>(asteroid)
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- if it wasn&#39;t a small asteroid, spawn more</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> asteroid.size <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">8</span> <span style="color:#ff79c6">or</span> asteroid.size <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">for</span> i<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>,<span style="color:#bd93f9">2</span>,<span style="color:#bd93f9">1</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>      create_asteroid(asteroid.x,asteroid.y,randfloat(<span style="color:#bd93f9">2</span>),randfloat(<span style="color:#bd93f9">2</span>),asteroid.size<span style="color:#ff79c6">/</span><span style="color:#bd93f9">2</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> asteroid.size <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">8</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    increase_score(<span style="color:#bd93f9">10</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">elseif</span> asteroid.size <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">4</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    increase_score(<span style="color:#bd93f9">25</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">else</span>
-</span></span><span style="display:flex;"><span>    increase_score(<span style="color:#bd93f9">50</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  create_explosion(asteroid.x,asteroid.y)
-</span></span><span style="display:flex;"><span>  del(asteroids, asteroid)
-</span></span><span style="display:flex;"><span>  sfx(<span style="color:#bd93f9">2</span>)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">player_collision</span>()
-</span></span><span style="display:flex;"><span>  player.lives <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>  player.isdead <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
-</span></span><span style="display:flex;"><span>  player.ticks_until_respawn <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">30</span>
-</span></span><span style="display:flex;"><span>  player.x <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>
-</span></span><span style="display:flex;"><span>  player.y <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">64</span>
-</span></span><span style="display:flex;"><span>  player.vx <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.vy <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  player.isinvulnerable <span style="color:#ff79c6">=</span> <span style="color:#ff79c6">true</span>
-</span></span><span style="display:flex;"><span>  player.invulnerability_counter <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">60</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> player.lives <span style="color:#ff79c6">==</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span> sfx(<span style="color:#bd93f9">4</span>) <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">centerprint</span>(text,x,y,color)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> color <span style="color:#ff79c6">==</span> <span style="color:#ff79c6">nil</span> <span style="color:#ff79c6">then</span> color <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">7</span> <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  print(text,x<span style="color:#ff79c6">-#</span>text<span style="color:#ff79c6">*</span><span style="color:#bd93f9">4</span><span style="color:#ff79c6">/</span><span style="color:#bd93f9">2</span>,y,color)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">increase_score</span>(points)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> old_score <span style="color:#ff79c6">=</span> player.score1
-</span></span><span style="display:flex;"><span>  player.score1 <span style="color:#ff79c6">+=</span> points
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> flr((player.score1 <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">5000</span>)) <span style="color:#ff79c6">&gt;</span> flr((old_score <span style="color:#ff79c6">/</span> <span style="color:#bd93f9">5000</span>)) <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    player.lives <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>    sfx(<span style="color:#bd93f9">3</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> player.score1 <span style="color:#ff79c6">&gt;=</span> <span style="color:#bd93f9">10000</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    player.score2 <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">1</span>
-</span></span><span style="display:flex;"><span>    player.score1 <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">10000</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">print_score</span>()
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- cleverly printing the player&#39;s score</span>
-</span></span><span style="display:flex;"><span>  color(<span style="color:#bd93f9">7</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#8be9fd;font-style:italic">local</span> x_offset <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">if</span> player.score2 <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>    print(player.score2)
-</span></span><span style="display:flex;"><span>    x_offset <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">20</span> <span style="color:#ff79c6">-</span> <span style="color:#ff79c6">#</span>(player.score1<span style="color:#ff79c6">..</span><span style="color:#f1fa8c">&#34;&#34;</span>) <span style="color:#ff79c6">*</span> <span style="color:#bd93f9">4</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> i<span style="color:#ff79c6">=</span><span style="color:#bd93f9">4</span>,x_offset<span style="color:#ff79c6">-</span><span style="color:#bd93f9">4</span>,<span style="color:#bd93f9">4</span> <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    print(<span style="color:#f1fa8c">&#39;0&#39;</span>,i,<span style="color:#bd93f9">0</span>)
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  print(player.score1,x_offset,<span style="color:#bd93f9">0</span>)
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span></span></span></code></pre></div>
-</details>
-<h1 id="conclusion">Conclusion</h1>
-<p>I was able to make a fully-functional version of Asteroids in a relatively small
+had classes and things, maybe even multiple file support.</p><h2 id=code>Code</h2><details><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- asteroids</span>
+</span></span><span style=display:flex><span><span style=color:#6272a4>-- by vlek</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>tick <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>blink <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>true</span>
+</span></span><span style=display:flex><span>explosion_colors <span style=color:#ff79c6>=</span> {<span style=color:#bd93f9>6</span>,<span style=color:#bd93f9>7</span>,<span style=color:#bd93f9>12</span>}
+</span></span><span style=display:flex><span>game <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>player <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>laser_shots <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>asteroids <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>explosions <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>brighter <span style=color:#ff79c6>=</span> {<span style=color:#bd93f9>1</span>,<span style=color:#bd93f9>5</span>,<span style=color:#bd93f9>14</span>,<span style=color:#bd93f9>11</span>,<span style=color:#bd93f9>9</span>,<span style=color:#bd93f9>13</span>,<span style=color:#bd93f9>7</span>,<span style=color:#bd93f9>7</span>,<span style=color:#bd93f9>14</span>,<span style=color:#bd93f9>10</span>,<span style=color:#bd93f9>7</span>,<span style=color:#bd93f9>7</span>,<span style=color:#bd93f9>7</span>,<span style=color:#bd93f9>6</span>,<span style=color:#bd93f9>15</span>,<span style=color:#bd93f9>7</span>}
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>line</span>(x1,y1,x2,y2,c)
+</span></span><span style=display:flex><span>  dx<span style=color:#ff79c6>=</span>x2<span style=color:#ff79c6>-</span>x1
+</span></span><span style=display:flex><span>  dy<span style=color:#ff79c6>=</span>y2<span style=color:#ff79c6>-</span>y1
+</span></span><span style=display:flex><span>  len<span style=color:#ff79c6>=</span> sqrt(dx<span style=color:#ff79c6>*</span>dx<span style=color:#ff79c6>+</span>dy<span style=color:#ff79c6>*</span>dy)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> len !<span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> f<span style=color:#ff79c6>=</span><span style=color:#bd93f9>0</span>,len,<span style=color:#bd93f9>0.3</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>      x<span style=color:#ff79c6>=</span>x1<span style=color:#ff79c6>+</span>dx<span style=color:#ff79c6>*</span>f<span style=color:#ff79c6>/</span>len<span style=color:#ff79c6>+</span><span style=color:#bd93f9>0.5</span>
+</span></span><span style=display:flex><span>      y<span style=color:#ff79c6>=</span>y1<span style=color:#ff79c6>+</span>dy<span style=color:#ff79c6>*</span>f<span style=color:#ff79c6>/</span>len<span style=color:#ff79c6>+</span><span style=color:#bd93f9>0.5</span>
+</span></span><span style=display:flex><span>      pset(x,y,brighter[pget(x,y)<span style=color:#ff79c6>+</span><span style=color:#bd93f9>1</span>])
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>_init</span>()
+</span></span><span style=display:flex><span>  game_menu()
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>_draw</span>()
+</span></span><span style=display:flex><span>  game.draw()
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>_update</span>()
+</span></span><span style=display:flex><span>  game.update()
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>game_menu</span>()
+</span></span><span style=display:flex><span>  generate_asteroids(<span style=color:#bd93f9>8</span>)
+</span></span><span style=display:flex><span>  game.update <span style=color:#ff79c6>=</span> menu_update
+</span></span><span style=display:flex><span>  game.draw <span style=color:#ff79c6>=</span> draw_menu
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>menu_update</span>()
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>5</span>,<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> btnp(i) <span style=color:#ff79c6>then</span> new_game() <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> asteroid <span style=color:#ff79c6>in</span> all(asteroids) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    do_move(asteroid)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  do_tick()
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>draw_menu</span>()
+</span></span><span style=display:flex><span>  cls()
+</span></span><span style=display:flex><span>  rectfill(<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>128</span>,<span style=color:#bd93f9>128</span>,<span style=color:#bd93f9>1</span>)
+</span></span><span style=display:flex><span>  draw_asteroids()
+</span></span><span style=display:flex><span>  centerprint(<span style=color:#f1fa8c>&#39;asteroids&#39;</span>,<span style=color:#bd93f9>64</span>,<span style=color:#bd93f9>36</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> blink <span style=color:#ff79c6>then</span> centerprint(<span style=color:#f1fa8c>&#39;press any button to start&#39;</span>,<span style=color:#bd93f9>64</span>,<span style=color:#bd93f9>94</span>) <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>new_game</span>()
+</span></span><span style=display:flex><span>  player <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  player.x <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>64</span>
+</span></span><span style=display:flex><span>  player.y <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>64</span>
+</span></span><span style=display:flex><span>  player.vx <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.vy <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.thrust <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0.1</span>
+</span></span><span style=display:flex><span>  player.max_thrust <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>4</span>
+</span></span><span style=display:flex><span>  player.facing_angle <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>275</span>
+</span></span><span style=display:flex><span>  player.score1 <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.score2 <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.lives <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>4</span>
+</span></span><span style=display:flex><span>  player.level <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.level_display_counter <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.ticks_until_next_level <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>60</span>
+</span></span><span style=display:flex><span>  player.isdead <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>
+</span></span><span style=display:flex><span>  player.ticks_until_respawn <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>90</span>
+</span></span><span style=display:flex><span>  player.isinvulnerable <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>
+</span></span><span style=display:flex><span>  player.invulnerability_counter <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>60</span>
+</span></span><span style=display:flex><span>  laser_shots <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  asteroids <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  explosions <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  game.update <span style=color:#ff79c6>=</span> game_update
+</span></span><span style=display:flex><span>  game.draw <span style=color:#ff79c6>=</span> game_draw
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>game_update</span>()
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> explosion <span style=color:#ff79c6>in</span> all(explosions) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> explosion.steps <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>10</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      explosion.steps <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>for</span> bit <span style=color:#ff79c6>in</span> all(explosion.bits) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>        do_move(bit)
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      del(explosions, explosion)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> laser_beam <span style=color:#ff79c6>in</span> all(laser_shots) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>-- check for collisions with asteroids</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> collided <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> asteroid <span style=color:#ff79c6>in</span> all(asteroids) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> check_collision(laser_beam.x,laser_beam.y,asteroid.x,asteroid.y,<span style=color:#bd93f9>2</span>,asteroid.collision_size) <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        collided <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>true</span>
+</span></span><span style=display:flex><span>        asteroid_collision(asteroid)
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>break</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> collided <span style=color:#ff79c6>or</span> laser_beam.movement_count <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>29</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      del(laser_shots, laser_beam)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      do_move(laser_beam)
+</span></span><span style=display:flex><span>      laser_beam.movement_count <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> <span style=color:#ff79c6>#</span>asteroids <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> asteroid <span style=color:#ff79c6>in</span> all(asteroids) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>      <span style=color:#6272a4>-- check for collision with player spaceship</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> check_collision(player.x,player.y,asteroid.x,asteroid.y,<span style=color:#bd93f9>4</span>,asteroid.collision_size) <span style=color:#ff79c6>and</span> <span style=color:#ff79c6>not</span> player.isdead <span style=color:#ff79c6>and</span> <span style=color:#ff79c6>not</span> player.isinvulnerable <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        asteroid_collision(asteroid)
+</span></span><span style=display:flex><span>        player_collision()
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>        do_move(asteroid)
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- if there are no more asteroids, then spawn more</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> player.ticks_until_next_level <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      player.level <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>      player.level_display_counter <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>60</span>
+</span></span><span style=display:flex><span>      level_asteroids <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> player.level <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>5</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        level_asteroids <span style=color:#ff79c6>+=</span> player.level
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>        level_asteroids <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>5</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>      generate_asteroids(level_asteroids)
+</span></span><span style=display:flex><span>      player.ticks_until_next_level <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>90</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      player.ticks_until_next_level <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  do_move(player)
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- we&#39;re only tracking button presses when the player is alive</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> <span style=color:#ff79c6>not</span> player.isdead <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> btn(<span style=color:#bd93f9>0</span>) <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      player.facing_angle <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>5</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> player.facing_angle <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>360</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        player.facing_angle <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>360</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> btn(<span style=color:#bd93f9>1</span>) <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      player.facing_angle <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>5</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> player.facing_angle <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        player.facing_angle <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>360</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> btn(<span style=color:#bd93f9>2</span>) <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      <span style=color:#6272a4>-- update velocity and v-angle</span>
+</span></span><span style=display:flex><span>      player.vx <span style=color:#ff79c6>=</span> mid(<span style=color:#ff79c6>-</span>player.max_thrust,
+</span></span><span style=display:flex><span>                      player.vx <span style=color:#ff79c6>+</span> cos(player.facing_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>) <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>-</span>player.thrust,
+</span></span><span style=display:flex><span>                      player.max_thrust)
+</span></span><span style=display:flex><span>      player.vy <span style=color:#ff79c6>=</span> mid(<span style=color:#ff79c6>-</span>player.max_thrust,
+</span></span><span style=display:flex><span>                      player.vy <span style=color:#ff79c6>+</span> sin(player.facing_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>) <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>-</span>player.thrust,
+</span></span><span style=display:flex><span>                      player.max_thrust)
+</span></span><span style=display:flex><span>      sfx(<span style=color:#bd93f9>1</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      <span style=color:#6272a4>-- otherwise, we&#39;re going to apply the space breaks (physics be damned)</span>
+</span></span><span style=display:flex><span>      player.vx <span style=color:#ff79c6>*=</span> <span style=color:#bd93f9>0.99</span>
+</span></span><span style=display:flex><span>      player.vy <span style=color:#ff79c6>*=</span> <span style=color:#bd93f9>0.99</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>-- if they&#39;re trying to shoot and they have less than five bullets on screen,</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> btnp(<span style=color:#bd93f9>4</span>) <span style=color:#ff79c6>and</span> <span style=color:#ff79c6>#</span>laser_shots <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>5</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      <span style=color:#8be9fd;font-style:italic>local</span> nose_angle <span style=color:#ff79c6>=</span> player.facing_angle <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>180</span>
+</span></span><span style=display:flex><span>      shoot(player.x <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>5</span> <span style=color:#ff79c6>*</span> cos(nose_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>),
+</span></span><span style=display:flex><span>            player.y <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>5</span> <span style=color:#ff79c6>*</span> sin(nose_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>),
+</span></span><span style=display:flex><span>            cos(player.facing_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>) <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>-</span><span style=color:#bd93f9>2</span>,
+</span></span><span style=display:flex><span>            sin(player.facing_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>) <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>-</span><span style=color:#bd93f9>2</span>)
+</span></span><span style=display:flex><span>      sfx(<span style=color:#bd93f9>0</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> player.invulnerability_counter <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      player.invulnerability_counter <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> player.invulnerability_counter <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        player.isinvulnerable <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>-- if we have no more lives, game over</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> player.lives <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> player.ticks_until_respawn <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>for</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>5</span>,<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>          <span style=color:#ff79c6>if</span> btnp(i) <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>            new_game()
+</span></span><span style=display:flex><span>            <span style=color:#ff79c6>break</span>
+</span></span><span style=display:flex><span>          <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>        <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>        player.ticks_until_respawn <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> player.ticks_until_respawn <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        player.isdead <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>        player.ticks_until_respawn <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> player.level_display_counter <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span> player.level_display_counter <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  do_tick()
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>game_draw</span>()
+</span></span><span style=display:flex><span>  cls()
+</span></span><span style=display:flex><span>  rectfill(<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>128</span>,<span style=color:#bd93f9>128</span>,<span style=color:#bd93f9>1</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> explosion <span style=color:#ff79c6>in</span> all(explosions) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> bit <span style=color:#ff79c6>in</span> all(explosion.bits) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>      pset(bit.x,bit.y,bit.color)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> laser_beam <span style=color:#ff79c6>in</span> all(laser_shots) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    circfill(laser_beam.x,laser_beam.y,<span style=color:#bd93f9>1</span>,<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  draw_asteroids()
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- we&#39;re only going to draw the spaceship if the player isn&#39;t dead</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> player.isdead <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> player.lives <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> blink <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        centerprint(<span style=color:#f1fa8c>&#39;game over&#39;</span>,<span style=color:#bd93f9>64</span>,<span style=color:#bd93f9>36</span>,<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>      centerprint(<span style=color:#f1fa8c>&#39;play again?&#39;</span>,<span style=color:#bd93f9>64</span>,<span style=color:#bd93f9>85</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> <span style=color:#ff79c6>not</span> player.isinvulnerable <span style=color:#ff79c6>or</span> player.isinvulnerable <span style=color:#ff79c6>and</span> tick<span style=color:#ff79c6>%</span><span style=color:#bd93f9>15</span><span style=color:#ff79c6>&gt;</span><span style=color:#bd93f9>7</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      draw_spaceship(player.x, player.y, player.facing_angle)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> player.level_display_counter <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      <span style=color:#8be9fd;font-style:italic>local</span> level_string <span style=color:#ff79c6>=</span> <span style=color:#f1fa8c>&#39;level &#39;</span><span style=color:#ff79c6>..</span>player.level
+</span></span><span style=display:flex><span>      print(level_string,<span style=color:#bd93f9>64</span><span style=color:#ff79c6>-#</span>level_string<span style=color:#ff79c6>*</span><span style=color:#bd93f9>4</span><span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>,<span style=color:#bd93f9>36</span>,<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  print_score()
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>,player.lives<span style=color:#ff79c6>-</span><span style=color:#bd93f9>1</span>,<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    draw_spaceship(i<span style=color:#ff79c6>*</span><span style=color:#bd93f9>5</span>,<span style=color:#bd93f9>11</span>,<span style=color:#bd93f9>271</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>--print(&#39;2016 vlek&#39;,45,122)</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>draw_spaceship</span>(x_coord, y_coord, ship_angle)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> nose_angle <span style=color:#ff79c6>=</span> ship_angle <span style=color:#ff79c6>-</span> <span style=color:#bd93f9>180</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> nose_x_coord <span style=color:#ff79c6>=</span> x_coord <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>4</span> <span style=color:#ff79c6>*</span> cos(nose_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> nose_y_coord <span style=color:#ff79c6>=</span> y_coord <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>4</span> <span style=color:#ff79c6>*</span> sin(nose_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> line_points <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> angle <span style=color:#ff79c6>in</span> all({<span style=color:#bd93f9>30</span>,<span style=color:#ff79c6>-</span><span style=color:#bd93f9>30</span>}) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> x <span style=color:#ff79c6>=</span> x_coord <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>4</span> <span style=color:#ff79c6>*</span> cos((ship_angle <span style=color:#ff79c6>+</span> angle)<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> y <span style=color:#ff79c6>=</span> y_coord <span style=color:#ff79c6>+</span> <span style=color:#bd93f9>4</span> <span style=color:#ff79c6>*</span> sin((ship_angle <span style=color:#ff79c6>+</span> angle)<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>)
+</span></span><span style=display:flex><span>    add(line_points, {x,y})
+</span></span><span style=display:flex><span>    line(nose_x_coord,nose_y_coord,x,y,<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- connect the two legs of the spaceship</span>
+</span></span><span style=display:flex><span>  line(line_points[<span style=color:#bd93f9>1</span>][<span style=color:#bd93f9>1</span>],line_points[<span style=color:#bd93f9>1</span>][<span style=color:#bd93f9>2</span>],line_points[<span style=color:#bd93f9>2</span>][<span style=color:#bd93f9>1</span>],line_points[<span style=color:#bd93f9>2</span>][<span style=color:#bd93f9>2</span>],<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>draw_asteroids</span>()
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> asteroid <span style=color:#ff79c6>in</span> all(asteroids) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> point<span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>,<span style=color:#ff79c6>#</span>asteroid.points<span style=color:#ff79c6>-</span><span style=color:#bd93f9>1</span>,<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>      line(asteroid.points[point][<span style=color:#bd93f9>1</span>]<span style=color:#ff79c6>+</span>asteroid.x,
+</span></span><span style=display:flex><span>           asteroid.points[point][<span style=color:#bd93f9>2</span>]<span style=color:#ff79c6>+</span>asteroid.y,
+</span></span><span style=display:flex><span>           asteroid.points[point<span style=color:#ff79c6>+</span><span style=color:#bd93f9>1</span>][<span style=color:#bd93f9>1</span>]<span style=color:#ff79c6>+</span>asteroid.x,
+</span></span><span style=display:flex><span>           asteroid.points[point<span style=color:#ff79c6>+</span><span style=color:#bd93f9>1</span>][<span style=color:#bd93f9>2</span>]<span style=color:#ff79c6>+</span>asteroid.y,
+</span></span><span style=display:flex><span>           <span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#6272a4>-- lastly, draw the line between the first and last points:</span>
+</span></span><span style=display:flex><span>    line(asteroid.points[<span style=color:#bd93f9>1</span>][<span style=color:#bd93f9>1</span>]<span style=color:#ff79c6>+</span>asteroid.x,
+</span></span><span style=display:flex><span>         asteroid.points[<span style=color:#bd93f9>1</span>][<span style=color:#bd93f9>2</span>]<span style=color:#ff79c6>+</span>asteroid.y,
+</span></span><span style=display:flex><span>         asteroid.points[<span style=color:#ff79c6>#</span>asteroid.points][<span style=color:#bd93f9>1</span>]<span style=color:#ff79c6>+</span>asteroid.x,
+</span></span><span style=display:flex><span>         asteroid.points[<span style=color:#ff79c6>#</span>asteroid.points][<span style=color:#bd93f9>2</span>]<span style=color:#ff79c6>+</span>asteroid.y,<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>shoot</span>(x, y, vx, vy)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> laser_beam <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  laser_beam.x <span style=color:#ff79c6>=</span> x
+</span></span><span style=display:flex><span>  laser_beam.y <span style=color:#ff79c6>=</span> y
+</span></span><span style=display:flex><span>  laser_beam.vx <span style=color:#ff79c6>=</span> vx
+</span></span><span style=display:flex><span>  laser_beam.vy <span style=color:#ff79c6>=</span> vy
+</span></span><span style=display:flex><span>  laser_beam.movement_count <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  add(laser_shots, laser_beam)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>do_move</span>(obj)
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- perform movement:</span>
+</span></span><span style=display:flex><span>  obj.x <span style=color:#ff79c6>+=</span> obj.vx
+</span></span><span style=display:flex><span>  obj.y <span style=color:#ff79c6>+=</span> obj.vy
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- if we&#39;re out of screen bounds, throw us back in on the other side:</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> axis <span style=color:#ff79c6>in</span> all({<span style=color:#f1fa8c>&#39;x&#39;</span>,<span style=color:#f1fa8c>&#39;y&#39;</span>}) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> obj[axis] <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      obj[axis] <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>128</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>elseif</span> obj[axis] <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>128</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      obj[axis] <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>128</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>do_tick</span>()
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> tick <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>29</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    tick <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>    tick <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> blink <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      blink <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>false</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      blink <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>true</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>randint</span>(min, max)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> range<span style=color:#ff79c6>=</span>(max<span style=color:#ff79c6>+</span><span style=color:#bd93f9>1</span>)<span style=color:#ff79c6>-</span>min
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>return</span> flr(rnd(range)<span style=color:#ff79c6>+</span>min)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>randfloat</span>(max)
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- this is really misleading, but it gives a positive or a negative</span>
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- float up to but not including the maximum</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> randint(<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>1</span>) <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> rnd(max)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>return</span> rnd(max) <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>-</span><span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>create_asteroid</span>(x,y,vx,vy,size)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> asteroid <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  asteroid.x <span style=color:#ff79c6>=</span> x
+</span></span><span style=display:flex><span>  asteroid.y <span style=color:#ff79c6>=</span> y
+</span></span><span style=display:flex><span>  asteroid.vx <span style=color:#ff79c6>=</span> vx
+</span></span><span style=display:flex><span>  asteroid.vy <span style=color:#ff79c6>=</span> vy
+</span></span><span style=display:flex><span>  asteroid.size <span style=color:#ff79c6>=</span> size
+</span></span><span style=display:flex><span>  asteroid.points <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  asteroid.collision_size <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> degrees <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>360</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>while</span> degrees <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> degrees <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>30</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      degrees <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      degrees <span style=color:#ff79c6>-=</span> randint(<span style=color:#bd93f9>20</span>,<span style=color:#bd93f9>50</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> new_x <span style=color:#ff79c6>=</span> randint(size<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>,size)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> dx <span style=color:#ff79c6>=</span> new_x <span style=color:#ff79c6>*</span> cos(degrees<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> new_y <span style=color:#ff79c6>=</span> randint(size<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>,size)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> dy <span style=color:#ff79c6>=</span> new_y <span style=color:#ff79c6>*</span> sin(degrees<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> v <span style=color:#ff79c6>in</span> all({new_x, new_y}) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>if</span> v <span style=color:#ff79c6>&gt;</span> asteroid.collision_size <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>        asteroid.collision_size <span style=color:#ff79c6>=</span> v
+</span></span><span style=display:flex><span>      <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    add(asteroid.points, {dx,dy})
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  add(asteroids, asteroid)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>create_explosion</span>(x,y)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> explosion <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  explosion.x <span style=color:#ff79c6>=</span> x
+</span></span><span style=display:flex><span>  explosion.y <span style=color:#ff79c6>=</span> y
+</span></span><span style=display:flex><span>  explosion.bits <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>0</span>,randint(<span style=color:#bd93f9>5</span>,<span style=color:#bd93f9>9</span>),<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> bit <span style=color:#ff79c6>=</span> {}
+</span></span><span style=display:flex><span>    bit.x <span style=color:#ff79c6>=</span> x
+</span></span><span style=display:flex><span>    bit.y <span style=color:#ff79c6>=</span> y
+</span></span><span style=display:flex><span>    bit.vx <span style=color:#ff79c6>=</span> randfloat(<span style=color:#bd93f9>2</span>)
+</span></span><span style=display:flex><span>    bit.vy <span style=color:#ff79c6>=</span> randfloat(<span style=color:#bd93f9>2</span>)
+</span></span><span style=display:flex><span>    bit.color <span style=color:#ff79c6>=</span> explosion_colors[randint(<span style=color:#bd93f9>1</span>,<span style=color:#ff79c6>#</span>explosion_colors)]
+</span></span><span style=display:flex><span>    add(explosion.bits, bit)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  explosion.steps <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  add(explosions, explosion)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>check_collision</span>(x1,y1,x2,y2,rad1,rad2)
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- check collision for two objects based on central points and radii</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>return</span> rad1<span style=color:#ff79c6>+</span>rad2 <span style=color:#ff79c6>&gt;=</span> sqrt((x2<span style=color:#ff79c6>-</span>x1)<span style=color:#ff79c6>^</span><span style=color:#bd93f9>2</span><span style=color:#ff79c6>+</span>(y2<span style=color:#ff79c6>-</span>y1)<span style=color:#ff79c6>^</span><span style=color:#bd93f9>2</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>generate_asteroids</span>(asteroid_count)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> pico<span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>,asteroid_count,<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> x <span style=color:#ff79c6>=</span> randint(<span style=color:#bd93f9>1</span>,<span style=color:#bd93f9>127</span>)
+</span></span><span style=display:flex><span>    <span style=color:#8be9fd;font-style:italic>local</span> y <span style=color:#ff79c6>=</span> randint(<span style=color:#bd93f9>1</span>,<span style=color:#bd93f9>127</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> randint(<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>1</span>) <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>1</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      y <span style=color:#ff79c6>=</span> randint(<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>1</span>) <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>127</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>      x <span style=color:#ff79c6>=</span> randint(<span style=color:#bd93f9>0</span>,<span style=color:#bd93f9>1</span>) <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>127</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>    create_asteroid(x,y,randfloat(<span style=color:#bd93f9>1</span>),randfloat(<span style=color:#bd93f9>1</span>),<span style=color:#bd93f9>8</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>asteroid_collision</span>(asteroid)
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- if it wasn&#39;t a small asteroid, spawn more</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> asteroid.size <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>8</span> <span style=color:#ff79c6>or</span> asteroid.size <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>4</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>for</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>1</span>,<span style=color:#bd93f9>2</span>,<span style=color:#bd93f9>1</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>      create_asteroid(asteroid.x,asteroid.y,randfloat(<span style=color:#bd93f9>2</span>),randfloat(<span style=color:#bd93f9>2</span>),asteroid.size<span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> asteroid.size <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>8</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    increase_score(<span style=color:#bd93f9>10</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>elseif</span> asteroid.size <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>4</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    increase_score(<span style=color:#bd93f9>25</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>else</span>
+</span></span><span style=display:flex><span>    increase_score(<span style=color:#bd93f9>50</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  create_explosion(asteroid.x,asteroid.y)
+</span></span><span style=display:flex><span>  del(asteroids, asteroid)
+</span></span><span style=display:flex><span>  sfx(<span style=color:#bd93f9>2</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>player_collision</span>()
+</span></span><span style=display:flex><span>  player.lives <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>  player.isdead <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>true</span>
+</span></span><span style=display:flex><span>  player.ticks_until_respawn <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>30</span>
+</span></span><span style=display:flex><span>  player.x <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>64</span>
+</span></span><span style=display:flex><span>  player.y <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>64</span>
+</span></span><span style=display:flex><span>  player.vx <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.vy <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  player.isinvulnerable <span style=color:#ff79c6>=</span> <span style=color:#ff79c6>true</span>
+</span></span><span style=display:flex><span>  player.invulnerability_counter <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>60</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> player.lives <span style=color:#ff79c6>==</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span> sfx(<span style=color:#bd93f9>4</span>) <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>centerprint</span>(text,x,y,color)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> color <span style=color:#ff79c6>==</span> <span style=color:#ff79c6>nil</span> <span style=color:#ff79c6>then</span> color <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>7</span> <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  print(text,x<span style=color:#ff79c6>-#</span>text<span style=color:#ff79c6>*</span><span style=color:#bd93f9>4</span><span style=color:#ff79c6>/</span><span style=color:#bd93f9>2</span>,y,color)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>increase_score</span>(points)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> old_score <span style=color:#ff79c6>=</span> player.score1
+</span></span><span style=display:flex><span>  player.score1 <span style=color:#ff79c6>+=</span> points
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> flr((player.score1 <span style=color:#ff79c6>/</span> <span style=color:#bd93f9>5000</span>)) <span style=color:#ff79c6>&gt;</span> flr((old_score <span style=color:#ff79c6>/</span> <span style=color:#bd93f9>5000</span>)) <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    player.lives <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    sfx(<span style=color:#bd93f9>3</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> player.score1 <span style=color:#ff79c6>&gt;=</span> <span style=color:#bd93f9>10000</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    player.score2 <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>1</span>
+</span></span><span style=display:flex><span>    player.score1 <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>10000</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>print_score</span>()
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- cleverly printing the player&#39;s score</span>
+</span></span><span style=display:flex><span>  color(<span style=color:#bd93f9>7</span>)
+</span></span><span style=display:flex><span>  <span style=color:#8be9fd;font-style:italic>local</span> x_offset <span style=color:#ff79c6>=</span> <span style=color:#bd93f9>0</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>if</span> player.score2 <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>    print(player.score2)
+</span></span><span style=display:flex><span>    x_offset <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>20</span> <span style=color:#ff79c6>-</span> <span style=color:#ff79c6>#</span>(player.score1<span style=color:#ff79c6>..</span><span style=color:#f1fa8c>&#34;&#34;</span>) <span style=color:#ff79c6>*</span> <span style=color:#bd93f9>4</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> i<span style=color:#ff79c6>=</span><span style=color:#bd93f9>4</span>,x_offset<span style=color:#ff79c6>-</span><span style=color:#bd93f9>4</span>,<span style=color:#bd93f9>4</span> <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    print(<span style=color:#f1fa8c>&#39;0&#39;</span>,i,<span style=color:#bd93f9>0</span>)
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  print(player.score1,x_offset,<span style=color:#bd93f9>0</span>)
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span></span></span></code></pre></div></details><h1 id=conclusion>Conclusion</h1><p>I was able to make a fully-functional version of Asteroids in a relatively small
 amount of code in a toy game engine. The game itself is a little aggravating to
 play due to the small resolution that the engine offers, but is good for some
-edge-of-your-seat gameplay as asteroids quickly fly passed.</p>
-<p>As a learning project, I feel like this was a great opportunity. There were
+edge-of-your-seat gameplay as asteroids quickly fly passed.</p><p>As a learning project, I feel like this was a great opportunity. There were
 several things, especially fundamental game making concepts, that I was able to
 touch such as holding state for the intro, gameplay, and game over screens.
 There are a number of things that I would do differently today with the
 knowledge that I gained from the project, but I believe that that is a very
-common thing in programming which only shows growth.</p>
-<h2 id="overall-assessment">Overall assessment</h2>
-<p>I am proud of the finished product and also am happy that I took the time to
+common thing in programming which only shows growth.</p><h2 id=overall-assessment>Overall assessment</h2><p>I am proud of the finished product and also am happy that I took the time to
 learn what I did. I tried my best to first try things on my own before
 researching how others do things as a way to test myself. This retrofitting has
 caused some disjointed code and the single-file nature of the game files does
-not help this problem either.</p>
-<h2 id="things-that-could-be-better">Things that could be better</h2>
-<h3 id="gameplay">Gameplay</h3>
-<p>The game, due to the low resolution, makes it very difficult to play for long
+not help this problem either.</p><h2 id=things-that-could-be-better>Things that could be better</h2><h3 id=gameplay>Gameplay</h3><p>The game, due to the low resolution, makes it very difficult to play for long
 without dying. The controls themselves are fine, but, with how little game play
 area there is, the asteroids are upon the user quicker than in the original
 game. If I was going to tweak this, I would probably reduce the number of
 asteroids that appear on screen, make them a bit smaller, or change the
-asteroid sizes when they do appear.</p>
-<h3 id="difficulty-options">Difficulty options</h3>
-<p>Right now there is no setting for how hard the game ought to be. Even something
+asteroid sizes when they do appear.</p><h3 id=difficulty-options>Difficulty options</h3><p>Right now there is no setting for how hard the game ought to be. Even something
 like an Easy, Medium, and Hard mode selection would help with it dictating
 things like the number of lives that the user starts with and how big and how
-many asteroids are generated per level.</p>
-<h2 id="suggestible">Suggestible?</h2>
-<p>As a learning project, Asteroids is one of the better ones that I did. I would
+many asteroids are generated per level.</p><h2 id=suggestible>Suggestible?</h2><p>As a learning project, Asteroids is one of the better ones that I did. I would
 suggest others give it a shot and try their best to come up with efficient ways
-to add all of the functionality themselves.</p>
-
-    </article>
-  </div>
-</section>
-
-        </main><footer id="footer">
-    Copyright © 2022 Vlek
-</footer>
-</body>
-</html>
+to add all of the functionality themselves.</p></article></div></section></main><footer id=footer>Copyright © 2022 Vlek</footer></body></html>

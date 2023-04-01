@@ -1,161 +1,69 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A random collection of stuff I didn&#39;t want to forget">
-    
-    <link rel="shortcut icon" href="https://vlek.github.io/favicon.ico">
-    
-    <link rel="stylesheet" href="/css/style.min.css">
-
-    <title>Velocity</title>
-</head>
-<body><header id="banner">
-    <h2><a href="https://vlek.github.io">Vlek&#39;s Personal Blog</a></h2><br>
-    <i>A random collection of stuff I didn&#39;t want to forget</i>
-    <nav>
-        <ul>
-            
-        </ul>
-    </nav>
-</header>
-<main id="content">
-<section id="main">
-  <h1 id="title">Velocity</h1>
-  <aside id="meta">
-    <h4 id="date"> Wed Mar 29, 2023 </h4>
-    <h5 id="wordcount"> 902 Words </h5>
-  </aside>
-  <div>
-    <article id="content">
-      
-        <h1>Table of Contents</h1>
-
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#algorithm">Algorithm</a></li>
-    <li><a href="#example-case-asteroids">Example case: Asteroids</a>
-      <ul>
-        <li><a href="#adding-velocity">Adding velocity:</a></li>
-        <li><a href="#applying-movement">Applying movement:</a></li>
-      </ul>
-    </li>
-    <li><a href="#things-to-keep-in-mind">Things to keep in mind</a>
-      <ul>
-        <li><a href="#collision">Collision</a></li>
-        <li><a href="#changing-velocity">Changing velocity</a></li>
-        <li><a href="#bounce-effects">Bounce effects</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-      
-
-      <h1 id="introduction">Introduction</h1>
-<p>Things in video games tend to move. In order to calculate this movement and hold
-its state in memory, the direction and velocity needs to be held.</p>
-<p>There are a lot of cases, even in user interfaces, where things tend to slide in
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="A random collection of stuff I didn't want to forget"><link rel="shortcut icon" href=https://vlek.github.io/favicon.ico><link rel=stylesheet href=/css/style.min.css><title>Velocity</title></head><body><header id=banner><h2><a href=https://vlek.github.io>Vlek's Personal Blog</a></h2><br><i>A random collection of stuff I didn't want to forget</i><nav><ul></ul></nav></header><main id=content><section id=main><h1 id=title>Velocity</h1><aside id=meta><h4 id=date>Wed Mar 29, 2023</h4><h5 id=wordcount>902 Words</h5></aside><div><article id=content><h1>Table of Contents</h1><nav id=TableOfContents><ul><li><a href=#introduction>Introduction</a></li><li><a href=#algorithm>Algorithm</a></li><li><a href=#example-case-asteroids>Example case: Asteroids</a><ul><li><a href=#adding-velocity>Adding velocity:</a></li><li><a href=#applying-movement>Applying movement:</a></li></ul></li><li><a href=#things-to-keep-in-mind>Things to keep in mind</a><ul><li><a href=#collision>Collision</a></li><li><a href=#changing-velocity>Changing velocity</a></li><li><a href=#bounce-effects>Bounce effects</a></li></ul></li></ul></nav><h1 id=introduction>Introduction</h1><p>Things in video games tend to move. In order to calculate this movement and hold
+its state in memory, the direction and velocity needs to be held.</p><p>There are a lot of cases, even in user interfaces, where things tend to slide in
 and out of view, either linearly or non-linearly (where things either speed up or
 slow down as they get nearer or further away from their starting and ending
 positions). This is especially useful in video games however where things like a
 player&rsquo;s character needs to respond to gravity when they fall or are jumping
-from one platform to another.</p>
-<p>The way that this tracked is by holding a few variables which indicate the
+from one platform to another.</p><p>The way that this tracked is by holding a few variables which indicate the
 direction and speed that the object was previously going and is updated based on
 whether it has gotten to a floor position or may even increase in speed as it
 falls. Note here that there may be a bounce effect that is desired as well, but
 I will not be going into that here. Just know that this can be applied in those
 cases as well, but one would need to account for the current acceleration of the
 object as it hits a surface and the direction to figure out how quickly and in
-what direction it should bounce towards.</p>
-<h1 id="algorithm">Algorithm</h1>
-<p>In order to hold this state, each object that is movable should have the
-following variables:</p>
-<ul>
-<li>x_velocity: The positive or negative amount across the x-axis to move</li>
-<li>y_velocity: The positive or negative amount across the y-axis to move</li>
-</ul>
-<p>Notice that we&rsquo;re only dealing with two directions, but, as some may remember
+what direction it should bounce towards.</p><h1 id=algorithm>Algorithm</h1><p>In order to hold this state, each object that is movable should have the
+following variables:</p><ul><li>x_velocity: The positive or negative amount across the x-axis to move</li><li>y_velocity: The positive or negative amount across the y-axis to move</li></ul><p>Notice that we&rsquo;re only dealing with two directions, but, as some may remember
 from algebra class, we can create angles with this data by saving dissimilar
-values for the X and Y.</p>
-<h1 id="example-case-asteroids">Example case: Asteroids</h1>
-<h2 id="adding-velocity">Adding velocity:</h2>
-<p>In order to have movement, my spaceship needed to allow for the user to use the
+values for the X and Y.</p><h1 id=example-case-asteroids>Example case: Asteroids</h1><h2 id=adding-velocity>Adding velocity:</h2><p>In order to have movement, my spaceship needed to allow for the user to use the
 up arrow to go forward. This would then look at the angle that the spaceship was
-facing and apply the velocity.</p>
-<p>The reason that I am using the mid function here is that it always returns back
+facing and apply the velocity.</p><p>The reason that I am using the mid function here is that it always returns back
 the middle value. I am using this as a way to ensure that the value that I got
 back was always within the max value range given. This is up to the negative
-range of the max in order to have velocities going the opposite direction.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#6272a4">-- update velocity and v-angle</span>
-</span></span><span style="display:flex;"><span>player.vx <span style="color:#ff79c6">=</span> mid(
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">-</span>player.max_thrust,
-</span></span><span style="display:flex;"><span>  player.vx <span style="color:#ff79c6">+</span> cos(player.facing_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>) <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">-</span>player.thrust,
-</span></span><span style="display:flex;"><span>  player.max_thrust
-</span></span><span style="display:flex;"><span>)
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>player.vy <span style="color:#ff79c6">=</span> mid(
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">-</span>player.max_thrust,
-</span></span><span style="display:flex;"><span>  player.vy <span style="color:#ff79c6">+</span> sin(player.facing_angle<span style="color:#ff79c6">/</span><span style="color:#bd93f9">360</span>) <span style="color:#ff79c6">*</span> <span style="color:#ff79c6">-</span>player.thrust,
-</span></span><span style="display:flex;"><span>  player.max_thrust
-</span></span><span style="display:flex;"><span>)</span></span></code></pre></div>
-<h2 id="applying-movement">Applying movement:</h2>
-<p>For the case where I needed this, I had remade Asteroids and needed to hold the
+range of the max in order to have velocities going the opposite direction.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#6272a4>-- update velocity and v-angle</span>
+</span></span><span style=display:flex><span>player.vx <span style=color:#ff79c6>=</span> mid(
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>-</span>player.max_thrust,
+</span></span><span style=display:flex><span>  player.vx <span style=color:#ff79c6>+</span> cos(player.facing_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>) <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>-</span>player.thrust,
+</span></span><span style=display:flex><span>  player.max_thrust
+</span></span><span style=display:flex><span>)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>player.vy <span style=color:#ff79c6>=</span> mid(
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>-</span>player.max_thrust,
+</span></span><span style=display:flex><span>  player.vy <span style=color:#ff79c6>+</span> sin(player.facing_angle<span style=color:#ff79c6>/</span><span style=color:#bd93f9>360</span>) <span style=color:#ff79c6>*</span> <span style=color:#ff79c6>-</span>player.thrust,
+</span></span><span style=display:flex><span>  player.max_thrust
+</span></span><span style=display:flex><span>)</span></span></code></pre></div><h2 id=applying-movement>Applying movement:</h2><p>For the case where I needed this, I had remade Asteroids and needed to hold the
 velocity for my spaceship, asteroids, the explosion particles, and the shots
 that were fired. I had abstracted the items in such a way that I was able to use
-the same function for everything:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-lua" data-lang="lua"><span style="display:flex;"><span><span style="color:#ff79c6">function</span> <span style="color:#50fa7b">do_move</span>(obj)
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- perform movement:</span>
-</span></span><span style="display:flex;"><span>  obj.x <span style="color:#ff79c6">+=</span> obj.vx
-</span></span><span style="display:flex;"><span>  obj.y <span style="color:#ff79c6">+=</span> obj.vy
-</span></span><span style="display:flex;"><span>  <span style="color:#6272a4">-- if we&#39;re out of screen bounds, throw us back in on the other side:</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">for</span> axis <span style="color:#ff79c6">in</span> all({<span style="color:#f1fa8c">&#39;x&#39;</span>,<span style="color:#f1fa8c">&#39;y&#39;</span>}) <span style="color:#ff79c6">do</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> obj[axis] <span style="color:#ff79c6">&lt;</span> <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      obj[axis] <span style="color:#ff79c6">+=</span> <span style="color:#bd93f9">128</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">elseif</span> obj[axis] <span style="color:#ff79c6">&gt;</span> <span style="color:#bd93f9">128</span> <span style="color:#ff79c6">then</span>
-</span></span><span style="display:flex;"><span>      obj[axis] <span style="color:#ff79c6">-=</span> <span style="color:#bd93f9">128</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#ff79c6">end</span>
-</span></span><span style="display:flex;"><span><span style="color:#ff79c6">end</span></span></span></code></pre></div>
-<p>As you can see, the actual movement is simply applying the velocity that is
+the same function for everything:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-lua data-lang=lua><span style=display:flex><span><span style=color:#ff79c6>function</span> <span style=color:#50fa7b>do_move</span>(obj)
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- perform movement:</span>
+</span></span><span style=display:flex><span>  obj.x <span style=color:#ff79c6>+=</span> obj.vx
+</span></span><span style=display:flex><span>  obj.y <span style=color:#ff79c6>+=</span> obj.vy
+</span></span><span style=display:flex><span>  <span style=color:#6272a4>-- if we&#39;re out of screen bounds, throw us back in on the other side:</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>for</span> axis <span style=color:#ff79c6>in</span> all({<span style=color:#f1fa8c>&#39;x&#39;</span>,<span style=color:#f1fa8c>&#39;y&#39;</span>}) <span style=color:#ff79c6>do</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>if</span> obj[axis] <span style=color:#ff79c6>&lt;</span> <span style=color:#bd93f9>0</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      obj[axis] <span style=color:#ff79c6>+=</span> <span style=color:#bd93f9>128</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>elseif</span> obj[axis] <span style=color:#ff79c6>&gt;</span> <span style=color:#bd93f9>128</span> <span style=color:#ff79c6>then</span>
+</span></span><span style=display:flex><span>      obj[axis] <span style=color:#ff79c6>-=</span> <span style=color:#bd93f9>128</span>
+</span></span><span style=display:flex><span>    <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span>  <span style=color:#ff79c6>end</span>
+</span></span><span style=display:flex><span><span style=color:#ff79c6>end</span></span></span></code></pre></div><p>As you can see, the actual movement is simply applying the velocity that is
 saved to the given object&rsquo;s x/y coordinates. This is why the values can either
-be positive or negative to have the full 2D range as possible velocity values.</p>
-<p>The other part deals with the classic Asteroids case where items go off screen
+be positive or negative to have the full 2D range as possible velocity values.</p><p>The other part deals with the classic Asteroids case where items go off screen
 and should reappear on the other side of the screen. In the Pico-8 case, the
 screen is always 128 (Note I did this well before I had a degree, I did not
-save these as a configuration).</p>
-<h1 id="things-to-keep-in-mind">Things to keep in mind</h1>
-<h2 id="collision">Collision</h2>
-<p>One thing you may have noticed is that I have not accounted for collisions in my
+save these as a configuration).</p><h1 id=things-to-keep-in-mind>Things to keep in mind</h1><h2 id=collision>Collision</h2><p>One thing you may have noticed is that I have not accounted for collisions in my
 example case. The reason for that is, in Asteroids, when things collide, they
 tend to stop existing or at least reset. In the case of something like a
 side-scrolling adventure game, you are likely going to need to handle the case
-where the player jumps from one platform to another and comes to rest.</p>
-<h2 id="changing-velocity">Changing velocity</h2>
-<p>For things like UI elements that are supposed to glide across the screen and
+where the player jumps from one platform to another and comes to rest.</p><h2 id=changing-velocity>Changing velocity</h2><p>For things like UI elements that are supposed to glide across the screen and
 stop, there may even be a desired change in the velocity as the item goes across
 the screen that will need to be accounted for. This is likely going to be in the
-form of a formula that&rsquo;s applied across the distance traveled.</p>
-<p>Note that in my case, I did have a slowing effect applied. I took the x_velocity
+form of a formula that&rsquo;s applied across the distance traveled.</p><p>Note that in my case, I did have a slowing effect applied. I took the x_velocity
 and y_velocity values and multiplied them by 0.99 to create gradual slowing if
-speed was not constantly applied.</p>
-<h2 id="bounce-effects">Bounce effects</h2>
-<p>Another thing I have not touched on other than to mention I will not address it
+speed was not constantly applied.</p><h2 id=bounce-effects>Bounce effects</h2><p>Another thing I have not touched on other than to mention I will not address it
 is if a bounce effect is wanted. This is the case where an item should fall from
 a height, hit a surface, and then have at least some of its velocity applied in
 the opposite direction. For the case where the game is simulating a rubber
 object, it may be reduced realistically based on the bounciness of the object
 that is being simulated. In the case of a puzzle game, such as with Portal with
 the light sphere, the velocity does not change, merely the direction. For that,
-the x_velocity and y_velocity values would be inverted (i.e., value * - 1).</p>
-
-    </article>
-  </div>
-</section>
-
-        </main><footer id="footer">
-    Copyright © 2022 Vlek
-</footer>
-</body>
-</html>
+the x_velocity and y_velocity values would be inverted (i.e., value * - 1).</p></article></div></section></main><footer id=footer>Copyright © 2022 Vlek</footer></body></html>

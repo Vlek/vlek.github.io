@@ -1,81 +1,4 @@
-<!DOCTYPE html>
-<html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A random collection of stuff I didn&#39;t want to forget">
-    
-    <link rel="shortcut icon" href="https://vlek.github.io/favicon.ico">
-    
-    <link rel="stylesheet" href="/css/style.min.css">
-
-    <title>Creating an Auto-miner Using UORazor</title>
-</head>
-<body><header id="banner">
-    <h2><a href="https://vlek.github.io">Vlek&#39;s Personal Blog</a></h2><br>
-    <i>A random collection of stuff I didn&#39;t want to forget</i>
-    <nav>
-        <ul>
-            
-        </ul>
-    </nav>
-</header>
-<main id="content">
-<section id="main">
-  <h1 id="title">Creating an Auto-miner Using UORazor</h1>
-  <aside id="meta">
-    <h4 id="date"> Sun Jun 12, 2022 </h4>
-    <h5 id="wordcount"> 3591 Words </h5>
-  </aside>
-  <div>
-    <article id="content">
-      
-        <h1>Table of Contents</h1>
-
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#introduction">Introduction</a></li>
-    <li><a href="#environment-setup">Environment Setup</a></li>
-    <li><a href="#a-re-look-at-uorazors-macroing-system">A re-look at UORazor&rsquo;s macroing system</a>
-      <ul>
-        <li><a href="#the-things-i-noticed">The things I noticed</a></li>
-        <li><a href="#getting-around-limitations">Getting around limitations</a></li>
-      </ul>
-    </li>
-    <li><a href="#solution-design">Solution Design</a>
-      <ul>
-        <li><a href="#pseudocode">Pseudocode</a></li>
-        <li><a href="#logical-submacros">Logical submacros</a></li>
-      </ul>
-    </li>
-    <li><a href="#implementation">Implementation</a>
-      <ul>
-        <li><a href="#setbacks">Setbacks</a></li>
-        <li><a href="#workarounds">Workarounds</a></li>
-        <li><a href="#recording">Recording</a></li>
-        <li><a href="#code">Code</a></li>
-      </ul>
-    </li>
-    <li><a href="#analytics">Analytics</a>
-      <ul>
-        <li><a href="#methodology">Methodology</a></li>
-        <li><a href="#results">Results</a></li>
-      </ul>
-    </li>
-    <li><a href="#conclusion">Conclusion</a>
-      <ul>
-        <li><a href="#overall-assessment">Overall assessment</a></li>
-        <li><a href="#things-that-could-be-better">Things that could be better</a></li>
-        <li><a href="#applicability">Applicability</a></li>
-        <li><a href="#suggestible">Suggestible?</a></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
-      
-
-      <p><img src="/creating-an-auto-miner-using-uorazor/images/uo_background.jpg" alt="UO Nostalgia"></p>
-<h1 id="introduction">Introduction</h1>
-<p>I am a long-time Ultima Online player. I have gone through the game during many
+<!doctype html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="A random collection of stuff I didn't want to forget"><link rel="shortcut icon" href=https://vlek.github.io/favicon.ico><link rel=stylesheet href=/css/style.min.css><title>Creating an Auto-miner Using UORazor</title></head><body><header id=banner><h2><a href=https://vlek.github.io>Vlek's Personal Blog</a></h2><br><i>A random collection of stuff I didn't want to forget</i><nav><ul></ul></nav></header><main id=content><section id=main><h1 id=title>Creating an Auto-miner Using UORazor</h1><aside id=meta><h4 id=date>Sun Jun 12, 2022</h4><h5 id=wordcount>3591 Words</h5></aside><div><article id=content><h1>Table of Contents</h1><nav id=TableOfContents><ul><li><a href=#introduction>Introduction</a></li><li><a href=#environment-setup>Environment Setup</a></li><li><a href=#a-re-look-at-uorazors-macroing-system>A re-look at UORazor&rsquo;s macroing system</a><ul><li><a href=#the-things-i-noticed>The things I noticed</a></li><li><a href=#getting-around-limitations>Getting around limitations</a></li></ul></li><li><a href=#solution-design>Solution Design</a><ul><li><a href=#pseudocode>Pseudocode</a></li><li><a href=#logical-submacros>Logical submacros</a></li></ul></li><li><a href=#implementation>Implementation</a><ul><li><a href=#setbacks>Setbacks</a></li><li><a href=#workarounds>Workarounds</a></li><li><a href=#recording>Recording</a></li><li><a href=#code>Code</a></li></ul></li><li><a href=#analytics>Analytics</a><ul><li><a href=#methodology>Methodology</a></li><li><a href=#results>Results</a></li></ul></li><li><a href=#conclusion>Conclusion</a><ul><li><a href=#overall-assessment>Overall assessment</a></li><li><a href=#things-that-could-be-better>Things that could be better</a></li><li><a href=#applicability>Applicability</a></li><li><a href=#suggestible>Suggestible?</a></li></ul></li></ul></nav><p><img src=/creating-an-auto-miner-using-uorazor/images/uo_background.jpg alt="UO Nostalgia"></p><h1 id=introduction>Introduction</h1><p>I am a long-time Ultima Online player. I have gone through the game during many
 of its periods, experienced the game before assistant programs were widely used,
 and I have also used many different macroing systems. This is what sparked my
 interest in computer science and ultimately what I cut my teeth on when I was
@@ -84,27 +7,21 @@ especially since, for many servers (and many other games for that matter), what
 I was doing was considered cheating. Luckily the server that I was playing at
 the time, UOHybrid, did not consider macroing cheating so long as you were using
 an approved client assistant program and you were there at your PC watching it
-work.</p>
-<p>One of the first client assistant programs that came out that got widely used
+work.</p><p>One of the first client assistant programs that came out that got widely used
 (and, for some reason, still is used today even though there are other, better
 programs out there that replace the client completely with something that is not
 stuck at &lt;30 FPS) is UORazor. It&rsquo;s a program that is used to act as a MitM with
 the client and the server to allow for packets to be interpreted and injected by
 the assistant to allow for very basic automated actions to occur (think opening
 doors when you get close to them so you don&rsquo;t have to manually open them. This
-is, after all, a game from the 90&rsquo;s.)</p>
-<!--
-![UORazor Logo](/creating-an-auto-miner-using-uorazor/images/uorazor_logo.png)
--->
-<p>While I had moved on to things like UOSteam to really take advantage of being
+is, after all, a game from the 90&rsquo;s.)</p><p>While I had moved on to things like UOSteam to really take advantage of being
 able to type out scripts, having the ability to hold state in variables
 (revolutionary, I know), and other client-side niceties, a fair number stayed on
 UORazor and were screaming for help to deal with its shortcomings. One of the
 never-ending debates that came from the forums for UO were what assistant to
 use. This was largely a factor of what the server allowed, but, by and large,
 they were unable to detect (or simply didn&rsquo;t care enough to programmatically
-track) someone doing otherwise.</p>
-<p>During some of these debates on what clients people should be using, the topic
+track) someone doing otherwise.</p><p>During some of these debates on what clients people should be using, the topic
 of how capable they are of automation would inevitably be one of the factors.
 UOSteam and others were considered, and rightfully so, capable of more
 automation and thus considered cheater clients. One argument I usually posited
@@ -115,16 +32,11 @@ Others were completely willing to overlook the fun aspect of what I was
 attempting to do, so I generally also would posit as an aside that UORazor was
 also likely capable of that same sort of full process automation as well. It is
 that statement of likelihood that I would like to address in this article and
-fully flesh out whether it is in fact possible or if I was making false claims.</p>
-<h1 id="environment-setup">Environment Setup</h1>
-<p>One thing I was not looking forward to was figuring out how best to set up my
+fully flesh out whether it is in fact possible or if I was making false claims.</p><h1 id=environment-setup>Environment Setup</h1><p>One thing I was not looking forward to was figuring out how best to set up my
 environment given that it is two old Windows programs working together. However,
 the process was made simple by using Lutris. I followed the instructions given
 in <a href="https://www.reddit.com/r/wine_gaming/comments/ejoh2x/comment/fczh7o2/?utm_source=share&amp;utm_medium=web2x&amp;context=3">this Reddit thread</a>.
-In case it goes down, they are as follows:</p>
-<details>
-  <summary>Steps to install Windows app using Lutris</summary>
-<pre tabindex="0"><code>(Posted by u/E3FxGaming on r/wine_gaming 2020/01/03)
+In case it goes down, they are as follows:</p><details><summary>Steps to install Windows app using Lutris</summary><pre tabindex=0><code>(Posted by u/E3FxGaming on r/wine_gaming 2020/01/03)
 
 ## Install Wine Version with Lutris:
 
@@ -174,53 +86,33 @@ Wine-staging installed.
    
 Congrats, game should be installed and patched, the &#34;Play&#34; button should still start the
 game like normal.
-</code></pre></details>
-<p>It was honestly very easy. I do not know why I have had issues in the past
+</code></pre></details><p>It was honestly very easy. I do not know why I have had issues in the past
 installing things outside of Steam because it was straightforward. I had a bit
 of an issue initially because UO.com now only ships a lite installer that does
 not initially do the updating necessary to get the client.exe and other files
 necessary to play. So I had to go in and run UO.exe to update to get the needed
 files. After that was done, it was simple to install UORazor and it
-automatically detected the version of UO installed within the container.</p>
-<h1 id="a-re-look-at-uorazors-macroing-system">A re-look at UORazor&rsquo;s macroing system</h1>
-<p>First thing first, I wanted to try to start fresh by going over the macroing
+automatically detected the version of UO installed within the container.</p><h1 id=a-re-look-at-uorazors-macroing-system>A re-look at UORazor&rsquo;s macroing system</h1><p>First thing first, I wanted to try to start fresh by going over the macroing
 system as if I were viewing it for the first time. Since the last time I opened
 the program, I have gone through an entire master&rsquo;s program and have several
-years of development experience under my belt now.</p>
-<p><img src="/creating-an-auto-miner-using-uorazor/images/blank_macro_canvas.png" alt="Blank MacroScreen"></p>
-<h2 id="the-things-i-noticed">The things I noticed</h2>
-<ul>
-<li>The macroing system does allow for typing in commands now, but albeit not in a
+years of development experience under my belt now.</p><p><img src=/creating-an-auto-miner-using-uorazor/images/blank_macro_canvas.png alt="Blank MacroScreen"></p><h2 id=the-things-i-noticed>The things I noticed</h2><ul><li>The macroing system does allow for typing in commands now, but albeit not in a
 way that is readily usable. It is still better to record actions, copy them
-out, and then paste them into the editor than trying to type them out.</li>
-<li>It is incredibly hard to get all of the actions done in a way that it would be
+out, and then paste them into the editor than trying to type them out.</li><li>It is incredibly hard to get all of the actions done in a way that it would be
 able to record all in one go, but that seems to be the way the editor wishes
-one to do things.</li>
-<li>I tried to chain macros by calling one after another, but it seems to treat a
-macro call like a callback function.
-<ul>
-<li>This does mean however that that called macro can call another macro and
+one to do things.</li><li>I tried to chain macros by calling one after another, but it seems to treat a
+macro call like a callback function.<ul><li>This does mean however that that called macro can call another macro and
 they can be daisy-chained in such a way that they allow for the control flow
 to be passed along. Not much is lost using this method because we do not
-have the ability to have state-holding variables anyway.</li>
-<li>One seriously irksome thing though with this is that, if you are using
+have the ability to have state-holding variables anyway.</li><li>One seriously irksome thing though with this is that, if you are using
 categories to try to keep your macros in a sane directory tree, those macros
 need to be placed into there respective categories first before being called
 in another macro otherwise it creates a duplicate of the called macro in the
-previous location where it existed.</li>
-</ul>
-</li>
-</ul>
-<h2 id="getting-around-limitations">Getting around limitations</h2>
-<h3 id="variables-for-holding-state">Variables for holding state</h3>
-<p>Unfortunately the assistant does not have the ability to save any variables
+previous location where it existed.</li></ul></li></ul><h2 id=getting-around-limitations>Getting around limitations</h2><h3 id=variables-for-holding-state>Variables for holding state</h3><p>Unfortunately the assistant does not have the ability to save any variables
 whatsoever. This is very bothersome for managing the locations that we are going
-to teleport to and ensuring that a progressive order is being kept.</p>
-<p>The way that I found to get around this however is to keep a bundle of a
+to teleport to and ensuring that a progressive order is being kept.</p><p>The way that I found to get around this however is to keep a bundle of a
 specific item that is not used for this process in the main container space of
 my bank. This allows me to check its count and use that as a way to know, using
-the limited conditional statement availability, where to go next.</p>
-<pre tabindex="0"><code>If there are no arrows,
+the limited conditional statement availability, where to go next.</p><pre tabindex=0><code>If there are no arrows,
   take from the main stack of arrows the maximum rune count number in bank box
   
 Cast Recall
@@ -234,66 +126,38 @@ Else:
     etc...
   End If
 Enf If
-</code></pre><h3 id="trying-to-make-sure-we-are-not-overweight-when-teleporting-back-home">Trying to make sure we are not overweight when teleporting back home</h3>
-<p>There really is not a good way to do this, even assistants like UOSteam were not
+</code></pre><h3 id=trying-to-make-sure-we-are-not-overweight-when-teleporting-back-home>Trying to make sure we are not overweight when teleporting back home</h3><p>There really is not a good way to do this, even assistants like UOSteam were not
 great at handling this. The best thing to do would be to match the ore colors
 and combine them into their lightest type (It doesn&rsquo;t make sense, but there is a
-small pile graphic that is much lighter.)</p>
-<p>In order to deal with this, we will instead for-loop enough times that, even if
-we got the big piles every time, we would be at or below our max weight.</p>
-<h3 id="getting-the-most-ore-back-possible">Getting the most ore back possible</h3>
-<p>When overweight, it might make sense to jettison some of the collected ore. We
+small pile graphic that is much lighter.)</p><p>In order to deal with this, we will instead for-loop enough times that, even if
+we got the big piles every time, we would be at or below our max weight.</p><h3 id=getting-the-most-ore-back-possible>Getting the most ore back possible</h3><p>When overweight, it might make sense to jettison some of the collected ore. We
 want to do that as little as possible. There is also the problem of leaving a
 vein not mined completely so we are not getting as much bang for our teleport.
 We have to deal with this limitation by analyzing the amount of loops we are
-doing and ensuring a good balance is struck.</p>
-<h3 id="leaving-as-few-seconds-wasted-per-location-as-possible">Leaving as few seconds wasted per location as possible</h3>
-<p>There are very clearly areas where the macro is going to be slow, especially
+doing and ensuring a good balance is struck.</p><h3 id=leaving-as-few-seconds-wasted-per-location-as-possible>Leaving as few seconds wasted per location as possible</h3><p>There are very clearly areas where the macro is going to be slow, especially
 with recalling, ensuring that things are not stepping on each other as state is
 not held back while queued actions happen, and server latency is an issue. This
 is again not something with an elegant solution, it is just a matter of multiple
-runs and playing with times until things generally work most of the time.</p>
-<h3 id="trying-not-to-dieget-caught-by-game-masters">Trying not to die/get caught by game masters</h3>
-<p>The best way that I have found to handle this is not with code but by ensuring
+runs and playing with times until things generally work most of the time.</p><h3 id=trying-not-to-dieget-caught-by-game-masters>Trying not to die/get caught by game masters</h3><p>The best way that I have found to handle this is not with code but by ensuring
 the locations that the user goes to collect resources are in areas that do not
 have monsters nor any real foot traffic. These may even be in areas in town
-which rarely get looked at.</p>
-<h3 id="dealing-with-in-game-server-saves">Dealing with in-game server saves</h3>
-<p>This unfortunately is one that is just going to be a pain and not one that we
-can really get around in a good way.</p>
-<p>The way that I could imagine dealing with this is by pigeon holing the system
+which rarely get looked at.</p><h3 id=dealing-with-in-game-server-saves>Dealing with in-game server saves</h3><p>This unfortunately is one that is just going to be a pain and not one that we
+can really get around in a good way.</p><p>The way that I could imagine dealing with this is by pigeon holing the system
 message when it happens, teleporting to a safe location, and closing out of the
 game. Another process would be watching for the game client process and restart
 it if the game client closes with the last log messages being that a save was
-happening and not something like the player died or ran out of resources.</p>
-<h3 id="resources-suck-and-you-run-out-of-them-quicker-than-you-think">Resources suck and you run out of them quicker than you think</h3>
-<p>With RunUO&rsquo;s buy agent, it is possible that a full cycle bot could be created so
+happening and not something like the player died or ran out of resources.</p><h3 id=resources-suck-and-you-run-out-of-them-quicker-than-you-think>Resources suck and you run out of them quicker than you think</h3><p>With RunUO&rsquo;s buy agent, it is possible that a full cycle bot could be created so
 long as the player was flush with cash or was also placing items on a vendor to
 sell for money. That is pretty deep, usually the place I stopped because I had
 issues getting it to work correctly, so I am going to say that this is likely
-possible with a bunch of asterisks applied.</p>
-<h3 id="z-axis-targeting">Z-Axis Targeting</h3>
-<p>For some reason, some of the time when targeting the ground it wants to take
+possible with a bunch of asterisks applied.</p><h3 id=z-axis-targeting>Z-Axis Targeting</h3><p>For some reason, some of the time when targeting the ground it wants to take
 into consideration the Z-Axis which means that we may be targeting an area that
 is above or below the actual ground as the terrain is not flat. While the RunUO
 code does not appear to care, Razor apparently does. Some of the runes that were
 previously marked for other assistant programs may need to be re-marked in
-locations where the terrain is flat enough for Razor to register.</p>
-<h4 id="runes-with-issues">Runes with issues:</h4>
-<p>In the end after going through all 32 runes several times, I came up with a list
-of the ones that I had to make changes to and the reason why:</p>
-<ul>
-<li>3: Unhappy alligator</li>
-<li>8: Unable to target</li>
-<li>13: Unable to target</li>
-<li>15: Unable to target</li>
-<li>16: A harpy lives here, does not appreciate company</li>
-</ul>
-<h1 id="solution-design">Solution Design</h1>
-<p>Having done some research into what is possible, it was time to put that work to
-use and figure out the best way to put those lessons learned into practice.</p>
-<h2 id="pseudocode">Pseudocode</h2>
-<pre tabindex="0"><code>while not dead
+locations where the terrain is flat enough for Razor to register.</p><h4 id=runes-with-issues>Runes with issues:</h4><p>In the end after going through all 32 runes several times, I came up with a list
+of the ones that I had to make changes to and the reason why:</p><ul><li>3: Unhappy alligator</li><li>8: Unable to target</li><li>13: Unable to target</li><li>15: Unable to target</li><li>16: A harpy lives here, does not appreciate company</li></ul><h1 id=solution-design>Solution Design</h1><p>Having done some research into what is possible, it was time to put that work to
+use and figure out the best way to put those lessons learned into practice.</p><h2 id=pseudocode>Pseudocode</h2><pre tabindex=0><code>while not dead
 
   for each mining location
   
@@ -313,28 +177,14 @@ use and figure out the best way to put those lessons learned into practice.</p>
       if our tools break, make a new one
       
     teleport back
-</code></pre><h2 id="logical-submacros">Logical submacros</h2>
-<p>While-loops are not available in the code, at least not by name. We also cannot
+</code></pre><h2 id=logical-submacros>Logical submacros</h2><p>While-loops are not available in the code, at least not by name. We also cannot
 search for and for-loop over a range, so that does not allow us to deal with the
 runebook GUIs to be able to recall to different locations. Taking these
 considerations into mind from the previous research, I broke up the logic into
-several chunks:</p>
-<ul>
-<li>Banking Ore</li>
-<li>Restocking inventory</li>
-<li>Teleporting to next location</li>
-<li>Mining Ore</li>
-<li>Teleporting back to the bank</li>
-</ul>
-<p>The state machine diagram is as follows:</p>
-<p><img src="/creating-an-auto-miner-using-uorazor/images/macro-state-machine.svg" alt="Submacro state machine"></p>
-<h1 id="implementation">Implementation</h1>
-<p>Originally when trying to implement this years ago, I believe I had given up due
+several chunks:</p><ul><li>Banking Ore</li><li>Restocking inventory</li><li>Teleporting to next location</li><li>Mining Ore</li><li>Teleporting back to the bank</li></ul><p>The state machine diagram is as follows:</p><p><img src=/creating-an-auto-miner-using-uorazor/images/macro-state-machine.svg alt="Submacro state machine"></p><h1 id=implementation>Implementation</h1><p>Originally when trying to implement this years ago, I believe I had given up due
 to the constraints thinking that there was no real way around them, or,
 rightfully so, that, if I was going to achieve this feat, it was going to be
-with better tools.</p>
-<h2 id="setbacks">Setbacks</h2>
-<p>I had completely forgotten about server saves until I loaded up the game and
+with better tools.</p><h2 id=setbacks>Setbacks</h2><p>I had completely forgotten about server saves until I loaded up the game and
 started taking inventory of the stuff that I had. As soon as the first one
 happened, I knew immediately that it was going to return and haunt me. What
 happens is, every so often, the server pauses and performs a save. This means
@@ -344,30 +194,17 @@ from less than a second for a personal server to well over a minute in some
 cases for very large servers. In other assistants, they have the ability to read
 system log messages and conditionally handle them, which allows them to wait out
 saves until the save complete message is given. Not for us however, this is just
-going to be a thorn in my side the whole time.</p>
-<p>Unfortunately, I believe they were having race conditions, the macro window did
+going to be a thorn in my side the whole time.</p><p>Unfortunately, I believe they were having race conditions, the macro window did
 not know which scope I was in half the time, and it was just very clear that
-Razor was not intended nor really capable of handling what I was trying to do.</p>
-<h2 id="workarounds">Workarounds</h2>
-<p>What I found is that there is a problem with the restock/organizer agents in
+Razor was not intended nor really capable of handling what I was trying to do.</p><h2 id=workarounds>Workarounds</h2><p>What I found is that there is a problem with the restock/organizer agents in
 that they continue on as though they spawned off another process to get them
 done. This means that the macros were continuing on even though there were item
 moves being added to a movement queue that was causing issues. This was smoothed
-over with waits, but it is not an elegant solution by any means.</p>
-<p>To get around the macro window issue, I copy and pasted all of my working code
+over with waits, but it is not an elegant solution by any means.</p><p>To get around the macro window issue, I copy and pasted all of my working code
 into a single macro. Luckily it was a straight shot through, there were no real
 areas were things were interconnected except for the exception message I was
-giving if I ran out of resources.</p>
-<h2 id="recording">Recording</h2>
-<video controls autoplay loop style="width:100%;">
-  <source src="/creating-an-auto-miner-using-uorazor/images/autominer_run.mp4">
-
-  Your browser does not support the video tag. :(
-</video>
-
-<h2 id="code">Code</h2>
-<details>
-<pre tabindex="0"><code>!Loop
+giving if I ran out of resources.</p><h2 id=recording>Recording</h2><video controls autoplay loop style=width:100%>
+<source src=/creating-an-auto-miner-using-uorazor/images/autominer_run.mp4>Your browser does not support the video tag. :(</video><h2 id=code>Code</h2><details><pre tabindex=0><code>!Loop
 Assistant.Macros.SpeechAction|0|52|3|ENU|2|16|2|Banco
 Assistant.Macros.PauseAction|00:00:01
 Assistant.Macros.HotKeyAction|0|Organizer Agent-1
@@ -553,100 +390,35 @@ Assistant.Macros.EndForAction
 Assistant.Macros.MacroCastSpellAction|32
 Assistant.Macros.WaitForTargetAction|30
 Assistant.Macros.AbsoluteTargetAction|0|0|1086580354|45|66|0|3834
-</code></pre></details>
-<h1 id="analytics">Analytics</h1>
-<p>While static analysis is impractical and code quality is lacking, analysis can
+</code></pre></details><h1 id=analytics>Analytics</h1><p>While static analysis is impractical and code quality is lacking, analysis can
 still be performed on the output of the process to ensure that it is functioning
-correctly and within a reasonable timeframe.</p>
-<h2 id="methodology">Methodology</h2>
-<p>While in-game monitoring was only going to allow me to measure things in the
+correctly and within a reasonable timeframe.</p><h2 id=methodology>Methodology</h2><p>While in-game monitoring was only going to allow me to measure things in the
 aggregate, I opted to have the in-game logs output to a file and analyze the
-results that way. It was able to give me per-teleport and per-run numbers.</p>
-<p>In order to measure a full run&rsquo;s worth of material, I cleared out my ore bag,
+results that way. It was able to give me per-teleport and per-run numbers.</p><p>In order to measure a full run&rsquo;s worth of material, I cleared out my ore bag,
 counted my starting resource amounts, and run the process again after modifying
 the code such, when it would replenish my arrow stack to start over again, it
-instead stops with a message saying that the run was complete.</p>
-<h3 id="tooling">Tooling</h3>
-<p>The tools used to perform the analysis were the standard UO client, UORazor, and
-linux-based commandline tools (grep, wc, etc.) along with Vim.</p>
-<h3 id="changes-to-process">Changes to Process</h3>
-<ul>
-<li>In order to have data to analyze, the client needed to be configured to output
-the log file which required some configuration changes.</li>
-<li>We also should have done a single click on the arrow type in the backpack to
-be able to know which spot was being mined.</li>
-</ul>
-<h2 id="results">Results</h2>
-<h3 id="starting-resources">Starting Resources:</h3>
-<ul>
-<li>Iron Ingots: 9141</li>
-<li>Black Pearl: 826</li>
-<li>Mandrake Root: 1238</li>
-<li>Blood Moss: 1188</li>
-</ul>
-<h3 id="ending-resources">Ending Resources:</h3>
-<ul>
-<li>Iron Ingots: 9085</li>
-<li>Black Pearl: 638</li>
-<li>Mandrake Root: 1052</li>
-<li>Blood Moss: 1000</li>
-</ul>
-<h3 id="mining-outcomes">Mining Outcomes:</h3>
-<ul>
-<li>Iron: 628</li>
-<li>Shadow: 492</li>
-<li>Failed to mine: 79</li>
-<li>Resources depleted: 22</li>
-</ul>
-<h3 id="ore-mined">Ore Mined:</h3>
-<p>Iron: 4194
+instead stops with a message saying that the run was complete.</p><h3 id=tooling>Tooling</h3><p>The tools used to perform the analysis were the standard UO client, UORazor, and
+linux-based commandline tools (grep, wc, etc.) along with Vim.</p><h3 id=changes-to-process>Changes to Process</h3><ul><li>In order to have data to analyze, the client needed to be configured to output
+the log file which required some configuration changes.</li><li>We also should have done a single click on the arrow type in the backpack to
+be able to know which spot was being mined.</li></ul><h2 id=results>Results</h2><h3 id=starting-resources>Starting Resources:</h3><ul><li>Iron Ingots: 9141</li><li>Black Pearl: 826</li><li>Mandrake Root: 1238</li><li>Blood Moss: 1188</li></ul><h3 id=ending-resources>Ending Resources:</h3><ul><li>Iron Ingots: 9085</li><li>Black Pearl: 638</li><li>Mandrake Root: 1052</li><li>Blood Moss: 1000</li></ul><h3 id=mining-outcomes>Mining Outcomes:</h3><ul><li>Iron: 628</li><li>Shadow: 492</li><li>Failed to mine: 79</li><li>Resources depleted: 22</li></ul><h3 id=ore-mined>Ore Mined:</h3><p>Iron: 4194
 Shadow: 3344
-Gold: 76</p>
-<p>All ore was converted down into the smallest ore piles *</p>
-<h3 id="tools-broken">Tools Broken:</h3>
-<ul>
-<li>Pickaxes: 14</li>
-</ul>
-<h1 id="conclusion">Conclusion</h1>
-<h2 id="overall-assessment">Overall assessment</h2>
-<p>Due to the new achievement system, I was working with a clean slate. By the time
+Gold: 76</p><p>All ore was converted down into the smallest ore piles *</p><h3 id=tools-broken>Tools Broken:</h3><ul><li>Pickaxes: 14</li></ul><h1 id=conclusion>Conclusion</h1><h2 id=overall-assessment>Overall assessment</h2><p>Due to the new achievement system, I was working with a clean slate. By the time
 I felt like I had a working script done, I was just passed 20k ore mined, which
 is quite an achievement and something that would have taken some time to mine by
-hand.</p>
-<p>I feel accomplished, like I had gotten something done that was nagging me in the
+hand.</p><p>I feel accomplished, like I had gotten something done that was nagging me in the
 back of my mind for a while. Although not perfect, I feel like I have proven
 within an afternoon that this is possible, additional polish may be applied to
-get it working even better, but what I have presented works.</p>
-<p>You know that what you made works when it is the case that you feel comfortable
+get it working even better, but what I have presented works.</p><p>You know that what you made works when it is the case that you feel comfortable
 taking your eyes off of it. During the results run, I was able to have the
 process run for nearly two hours without intervention before an errant lag spike
-caused it to trip up.</p>
-<h2 id="things-that-could-be-better">Things that could be better</h2>
-<h3 id="teleporting">Teleporting</h3>
-<p>One of the slowest parts of the bot is the selection for which spot to teleport
+caused it to trip up.</p><h2 id=things-that-could-be-better>Things that could be better</h2><h3 id=teleporting>Teleporting</h3><p>One of the slowest parts of the bot is the selection for which spot to teleport
 next. What I did works, but the nested if statements are all parsed in order so
 there is a significant lag as it goes through all of the <code>Ifs</code> and then the <code>End Ifs</code>. The way that I could think of doing this that will scale is to do a binary
 search using submacros. This will get around most of the nested <code>If</code>&rsquo;s where
-possible.</p>
-<h3 id="locations">Locations</h3>
-<p>I was using the books and spots that I had. However, these were not necessarily
-the best spots. I do not know if the two books I had were not repeats.</p>
-<h2 id="applicability">Applicability</h2>
-<p>While I did this specifically for mining ore, the technique could readily be
+possible.</p><h3 id=locations>Locations</h3><p>I was using the books and spots that I had. However, these were not necessarily
+the best spots. I do not know if the two books I had were not repeats.</p><h2 id=applicability>Applicability</h2><p>While I did this specifically for mining ore, the technique could readily be
 applied to other types of resources. I am thinking specifically lumberjacking as
-a potential candidate.</p>
-<h2 id="suggestible">Suggestible?</h2>
-<p>In no way would I suggest someone do this. Not only is it potentially not
+a potential candidate.</p><h2 id=suggestible>Suggestible?</h2><p>In no way would I suggest someone do this. Not only is it potentially not
 allowed by the server that one is playing on, it also is just silly. There are
 other clients, other means of doing the same thing. This was, as stated in the
-introduction, merely to show it is possible.</p>
-
-    </article>
-  </div>
-</section>
-
-        </main><footer id="footer">
-    Copyright © 2022 Vlek
-</footer>
-</body>
-</html>
+introduction, merely to show it is possible.</p></article></div></section></main><footer id=footer>Copyright © 2022 Vlek</footer></body></html>
