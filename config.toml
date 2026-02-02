@@ -20,3 +20,16 @@ startLevel = 1
 [markup.goldmark.renderer]
 unsafe = true
 footnote = true
+
+[menu]
+  [[menu.nav]]
+  identifier = "home"
+  name = "Home"
+  url = "/"
+  weight = 1
+
+  [[menu.nav]]
+  identifier = "about"
+  name = "About"
+  url = "/about"
+  weight = 2
