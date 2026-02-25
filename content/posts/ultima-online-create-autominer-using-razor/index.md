@@ -2,6 +2,7 @@
 title: "Creating an Auto-miner Using UORazor"
 date: 2022-06-12T14:13:28-07:00
 description: "Returning to UO to fulfill an old bluff."
+topics: ["uo", "scripting", "automation"]
 ---
 
 # Introduction
@@ -25,10 +26,6 @@ the client and the server to allow for packets to be interpreted and injected by
 the assistant to allow for very basic automated actions to occur (think opening
 doors when you get close to them so you don't have to manually open them. This
 is, after all, a game from the 90's.)
-
-<!--
-![UORazor Logo](/creating-an-auto-miner-using-uorazor/images/uorazor_logo.png)
--->
 
 While I had moved on to things like UOSteam to really take advantage of being
 able to type out scripts, having the ability to hold state in variables
@@ -60,63 +57,66 @@ the process was made simple by using Lutris. I followed the instructions given
 in [this Reddit thread](https://www.reddit.com/r/wine_gaming/comments/ejoh2x/comment/fczh7o2/?utm_source=share&utm_medium=web2x&context=3).
 In case it goes down, they are as follows:
 
-<details>
-  <summary>Steps to install Windows app using Lutris</summary>
+{{< accordion
+  separated=true
+>}}
+{{< accordionItem
+  mode="closed"
+  title="Steps to install Windows app using Lutris"
+  separated=true
+>}}
+  (Posted by u/E3FxGaming on r/wine_gaming 2020/01/03)
 
-```
-(Posted by u/E3FxGaming on r/wine_gaming 2020/01/03)
+  ## Install Wine Version with Lutris:
 
-## Install Wine Version with Lutris:
+  Note: Alternatively if you've already installed something like Wine-staging on your
+  PC you could theoretically skip this. You'll always have the option to pick the Wine
+  version installed on your system, however the versions Lutris offers also take advantage
+  of fixes introduced by Proton, so you may want to follow this guide part even with
+  Wine-staging installed.
 
-Note: Alternatively if you've already installed something like Wine-staging on your
-PC you could theoretically skip this. You'll always have the option to pick the Wine
-version installed on your system, however the versions Lutris offers also take advantage
-of fixes introduced by Proton, so you may want to follow this guide part even with
-Wine-staging installed.
+  1. In Lutris use the three vertical dots in the top right corner > activate "Show Left
+    Side Panel" if it's deactivated
+  2. Hover your mouse cursor over the "Wine" entry in the left side panel, there should be
+    a download icon "Manage Versions" - click that.
+  3. Tick the Wine version you want to use. It'll download the Wine version - you can click
+    the "OK" button to close the dialogue afterwards.
 
-1. In Lutris use the three vertical dots in the top right corner > activate "Show Left
-   Side Panel" if it's deactivated
-2. Hover your mouse cursor over the "Wine" entry in the left side panel, there should be
-   a download icon "Manage Versions" - click that.
-3. Tick the Wine version you want to use. It'll download the Wine version - you can click
-   the "OK" button to close the dialogue afterwards.
+  ## Install Game:
 
-## Install Game:
+  1. Create a new folder somewhere under which the new wine prefix will be set-up.
+  2. In Lutris in the top left corner click the plus icon > "Add Games..."
+  3. Set the game name, choose "Wine (Runs Windows games)" as a runner (this is important
+    because it changes the content of the "Game options" tab
+  4. On the "Game options" tab select the executable you've got (the installer one)
+  5. On the "Game options" tab select the Wine prefix (just the empty folder you created
+    during step 1)
+  6. On the "Runner options" tab make sure your desired Wine version is used.
+  7. Click the "Save" button in the bottom right corner to close the dialogue. Select the
+    newely created game entry in your Lutris library and use the "Play" button (right side
+    panel - if not enabled you can enable it with the three vertical dots menu in the top
+    right corner).
+  8. Follow and complete the installation wizard.
 
-1. Create a new folder somewhere under which the new wine prefix will be set-up.
-2. In Lutris in the top left corner click the plus icon > "Add Games..."
-3. Set the game name, choose "Wine (Runs Windows games)" as a runner (this is important
-   because it changes the content of the "Game options" tab
-4. On the "Game options" tab select the executable you've got (the installer one)
-5. On the "Game options" tab select the Wine prefix (just the empty folder you created
-   during step 1)
-6. On the "Runner options" tab make sure your desired Wine version is used.
-7. Click the "Save" button in the bottom right corner to close the dialogue. Select the
-   newely created game entry in your Lutris library and use the "Play" button (right side
-   panel - if not enabled you can enable it with the three vertical dots menu in the top
-   right corner).
-8. Follow and complete the installation wizard.
+  ## Edit Stuff and Install Additional Patches:
 
-## Edit Stuff and Install Additional Patches:
-
-1. Right click on your newely created Lutris library entry > "Configure".
-2. On the "Game options" tab point the executable entry towards the exe that would launch
-   your game (should be in some sub-folder of the wine prefix folder you created). Do not
-   point it to one of your patches, there is an easier way to install those than constantly
-   editing your Lutris game configuration.
-4. Click the "Save" button in the bottom right corner to save your change and close the
-   dialogue.
-6. Once more use the "Play" button to confirm your base game works. After confirming it
-   close your game. (you can use the "Kill all Wine processes" option in the right side
-   panel to ensure all Wine processes have ended)
-9. Eiter right click your game or use the right side panel > "Run EXE inside wine prefix" > 
-   choose your patch exe and follow the wizard instructions.
-   
-Congrats, game should be installed and patched, the "Play" button should still start the
-game like normal.
-```
-
-</details>
+  1. Right click on your newely created Lutris library entry > "Configure".
+  2. On the "Game options" tab point the executable entry towards the exe that would launch
+    your game (should be in some sub-folder of the wine prefix folder you created). Do not
+    point it to one of your patches, there is an easier way to install those than constantly
+    editing your Lutris game configuration.
+  4. Click the "Save" button in the bottom right corner to save your change and close the
+    dialogue.
+  6. Once more use the "Play" button to confirm your base game works. After confirming it
+    close your game. (you can use the "Kill all Wine processes" option in the right side
+    panel to ensure all Wine processes have ended)
+  9. Eiter right click your game or use the right side panel > "Run EXE inside wine prefix" > 
+    choose your patch exe and follow the wizard instructions.
+    
+  Congrats, game should be installed and patched, the "Play" button should still start the
+  game like normal.
+{{< /accordionItem >}}
+{{< /accordion >}}
 
 It was honestly very easy. I do not know why I have had issues in the past
 installing things outside of Steam because it was straightforward. I had a bit
@@ -133,8 +133,7 @@ system as if I were viewing it for the first time. Since the last time I opened
 the program, I have gone through an entire master's program and have several
 years of development experience under my belt now.
 
-![Blank Macro
-Screen](/creating-an-auto-miner-using-uorazor/images/blank_macro_canvas.png)
+![Blank Macro Screen](./images/blank_macro_canvas.png)
 
 ## The things I noticed
 
@@ -169,7 +168,7 @@ specific item that is not used for this process in the main container space of
 my bank. This allows me to check its count and use that as a way to know, using
 the limited conditional statement availability, where to go next.
 
-```
+```python {linenos=inline style=dracula}
 If there are no arrows,
   take from the main stack of arrows the maximum rune count number in bank box
   
@@ -264,9 +263,7 @@ use and figure out the best way to put those lessons learned into practice.
 
 ## Pseudocode
 
-
-
-```
+```python {linenos=inline style=dracula}
 while not dead
 
   for each mining location
@@ -359,7 +356,7 @@ giving if I ran out of resources.
 
 {{< accordion mode="closed" separated=true >}}
 {{< accordionItem title="UORazor Miner Bot Code" icon="code" open=false >}}
-```
+```python {linenos=inline style=dracula}
 !Loop
 Assistant.Macros.SpeechAction|0|52|3|ENU|2|16|2|Banco
 Assistant.Macros.PauseAction|00:00:01
