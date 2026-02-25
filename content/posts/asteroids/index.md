@@ -1,8 +1,6 @@
 ---
 title: "Remaking Asteroids"
 date: 2023-03-15T00:00:00-07:00
-draft: false
-toc: true
 ---
 
 <iframe src="https://www.lexaloffle.com/bbs/widget.php?pid=22904" allowfullscreen width="621" height="513" style="border:none; overflow:hidden"></iframe>

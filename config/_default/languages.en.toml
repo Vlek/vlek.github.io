@@ -1,0 +1,27 @@
+disabled = false
+languageCode = "en"
+languageName = "English"
+weight = 10
+title = "The Write-up"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "January 2 2006"
+  # logo = "img/logo.png"
+  # secondaryLogo = "img/secondary-logo.png"
+  description = "A colleciton of articles regarding various programming projects."
+  # copyright = "Copy, _right?_ :thinking_face:"
+
+[params.author]
+  name = "Derek McCammond"
+  email = "derek.mccamond@h7yk.com"
+  image = "img/lunabeach.jpeg"
+  imageQuality = 96
+  headline = "Senior Dev | Master's in Software Engineering"
+  bio = "Senior Dev | Master's in Software Engineering"
+  links = [
+    { github = "https://github.com/vlek" },
+    { linkedin = "https://linkedin.com/in/dmccammond" },
+  ]
