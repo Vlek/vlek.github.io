@@ -1,11 +1,9 @@
 ---
 title: "Creating an Auto-miner Using UORazor"
 date: 2022-06-12T14:13:28-07:00
-draft: false
-toc: true
+description: "Returning to UO to fulfill an old bluff."
 ---
 
-![UO Nostalgia](/creating-an-auto-miner-using-uorazor/images/uo_background.jpg)
 # Introduction
 
 I am a long-time Ultima Online player. I have gone through the game during many
@@ -350,12 +348,17 @@ giving if I ran out of resources.
 
 ## Recording
 
-{{< video "/creating-an-auto-miner-using-uorazor/images/autominer_run.mp4" >}}
+{{< video 
+  src="images/autominer_run.mp4"
+  caption="Autominer bot running through some locations."
+  loop=true
+  muted=true
+>}}
 
 ## Code
 
-<details>
-
+{{< accordion mode="closed" separated=true >}}
+{{< accordionItem title="UORazor Miner Bot Code" icon="code" open=false >}}
 ```
 !Loop
 Assistant.Macros.SpeechAction|0|52|3|ENU|2|16|2|Banco
@@ -544,8 +547,8 @@ Assistant.Macros.MacroCastSpellAction|32
 Assistant.Macros.WaitForTargetAction|30
 Assistant.Macros.AbsoluteTargetAction|0|0|1086580354|45|66|0|3834
 ```
-
-</details>
+{{< /accordionItem >}}
+{{< /accordion >}}
 
 # Analytics
 
