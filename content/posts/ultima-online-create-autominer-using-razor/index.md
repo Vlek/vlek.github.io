@@ -2,7 +2,7 @@
 title: "Creating an Auto-miner Using UORazor"
 date: 2022-06-12T14:13:28-07:00
 description: "Returning to UO to fulfill an old bluff."
-topics: ["uo", "scripting", "automation"]
+tags: ["uo", "scripting", "automation"]
 ---
 
 # Introduction
