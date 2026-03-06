@@ -61,7 +61,7 @@ notes on an online training and be able to hit Win + Space to pause the video,
 keep typing away, and then win + Space again to play the video again. It keeps
 you from moving your hand to the mouse and losing the flow that you're in.
 
-I ~really~ like Win + x for close window. It's awkward enough that I have never
+I really like Win + x for close window. It's awkward enough that I have never
 accidentally hit it, but close enough to be easy to hit when I do want it.
 
 I have also had several instances where the Windows 11 start menu just won't
@@ -90,10 +90,10 @@ return
 This I think mostly came from my time with Gnome on Ubuntu. These are pretty
 standard-looking program shortcut macros that you would use. It's Ctrl + Alt +
 \<letter\> that references the program the best except for the terminal one
-where it's usually Win + t, and I added a modified version for powershell.
+where it's usually Win + t, and I added a modified version for PowerShell.
 
 Personally, I feel much more comfortable in linux, so that's my default. You may
-want to switch if you find yourself using powershell/cmd more.
+want to switch if you find yourself using PowerShell/cmd more.
 
 ``` AutoHotkey
 ^!n::
