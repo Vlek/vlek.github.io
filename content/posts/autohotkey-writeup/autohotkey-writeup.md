@@ -23,7 +23,7 @@ offers quality of life macroing changes that make certain combinations easier to
 hit or would otherwise take one or more mouse clicks to do. I will go over them
 in detail to give you an idea of what is possible.
 
-## What I Use It For Today
+## What I Use It for Today
 
 Early on, the videogames that I would play would have macroing capabilities. I
 believe that, when something is hard to navigate, my brain automatically thinks
@@ -57,8 +57,8 @@ return
 ### Quality of Life Hotkeys
 
 I use these multiple times per day. It's very helpful if you're trying to take
-notes on an online training and be able to hit Win + Space to pause the video,
-keep typing away, and then win + Space again to play the video again. It keeps
+notes on an online training to be able to hit Win + Space to pause the video,
+keep typing away, and then Win + Space again to continue the video. It keeps
 you from moving your hand to the mouse and losing the flow that you're in.
 
 I really like Win + x for close window. It's awkward enough that I have never
@@ -111,7 +111,7 @@ return
 
 ### Standard Macros
 
-This is a great macro because not everything as a dictionary that's built
+This is a great macro because not everything has a dictionary built
 into it. Sometimes I am writing a Teams message and want to double-check
 that the work that I want to use actually means what I think it does.
 
@@ -221,7 +221,7 @@ CapsLock::Ctrl
 
 ## Conclusion
 
-AutoHotkey is a powerful little tool that can be used in a wide variety of
+AutoHotkey is a powerful tool that can be used in a wide variety of
 user-facing scenarios. Hopefully going through my script gives you some
 ideas as to how you may use it yourself. Just be warned, when you get into it,
 you may try to reach for COM objects and potentially use it in places that you
