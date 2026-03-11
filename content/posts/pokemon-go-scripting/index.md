@@ -27,7 +27,7 @@ collector's game.
 
 My interest in the game was how far I could automate it. And, before I
 inevitably got banned, I made it pretty far. Thankfully, I was able to spend a
-few months working on this and learning quite a lot before that happened.
+few months working on this and learned quite a lot before that happened.
 I finished a text-based version, and also made good work on a visual client.
 Below, I will detail the two versions, and then go into what it taught me.
 
