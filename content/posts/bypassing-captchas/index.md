@@ -1,11 +1,11 @@
 ---
-title: "Bypassing Captchas"
+title: "Web Scraping for Science"
 date: 2026-03-10T22:48:43-08:00
-description: "Easier than you think, but costs money per solved captcha."
+description: "Pulling data from the web to help research"
 tags: ["captchas", "web scraping"]
 ---
 
-# Introduction
+## Introduction
 
 Some websites are great treasure troves of information that you may want to
 scrape. Scraping can be hard on its own depending on the structure, but, to
@@ -14,12 +14,12 @@ through a recent process where I helped a data scientist gather the data they
 needed from an online source, CAPTCHAs are an easy enough hurdle to jump. It
 only takes a bit of money to pay a service to solve them for you.
 
-[!NOTE]
-Web scraping legality is something to consider. It 
-[is legal](https://www.geeksforgeeks.org/python/web-scrapping-legal-or-illegal/)
- if you are scraping data that does not require an account to access.
+> [!NOTE]
+> Web scraping legality is something to consider. It 
+> [is legal](https://www.geeksforgeeks.org/python/web-scrapping-legal-or-illegal/)
+> if you are scraping data that does not require an account to access!
 
-# Background
+## Background
 
 I was contacted by a friend who needed some data from a public site that had
 information in her area of study. The structure of the site consisted of search
@@ -37,8 +37,34 @@ something I wanted to use for game automation that would work perfectly for
 this. It would require additional money, but, thankfully the AWS bill was pretty
 small in the end.
 
-# Setup
+## Setup
 
-## Local Testing
+We wanted to first verify that everything was working when we pulled the
+information, so we worked locally on the scraper scripts. We had to create two
+separate ones: one for going through the listings and gathering all the
+individual pages and another for scraping the individual pages that we collected
+previously.
 
-## Cloud Setup
+### Local Testing
+
+Local testing was on my main PC with no parallel website calls in the hope that
+I would not trip any of the anti-scraping measures that the site took. This was
+to ensure that the output was correct and things worked as expected.
+
+We did run into issues with some pages, which was helpful to make adjustments to
+the code to work around them without things blowing up and give us a list of
+these failing pages so that they could manually be pulled at a later date.
+
+### Updating to Work in the Cloud
+
+After ensuring that the 
+
+### Cloud Setup
+
+## Running the Scrapers
+
+### Listing Scraper
+
+### Individual Page Scraper
+
+
